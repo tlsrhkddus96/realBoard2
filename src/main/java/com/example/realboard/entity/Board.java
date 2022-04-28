@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Getter
-@ToString
+@ToString(exclude = "member")
 public class Board extends BaseEntity{
 
     @Id
@@ -32,6 +32,9 @@ public class Board extends BaseEntity{
 
     @Column(columnDefinition = "integer default 0")
     private int parentNum;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
 
 /*    public void changeRef(Long ref){
