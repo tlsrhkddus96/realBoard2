@@ -7,7 +7,9 @@ import com.example.realboard.repository.ReplyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -55,6 +57,20 @@ public class ReplyTests {
             System.out.println(boardReply.getMember().getEmail());
 
         });
+
+    }
+
+
+    @Transactional
+    @Commit
+    @Test
+    public void DeleteReplyByMember(){
+
+        Long mid = 1L;
+
+        Member member = Member.builder().mid(mid).build();
+
+        replyRepository.deleteByMember(member);
 
     }
 

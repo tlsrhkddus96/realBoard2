@@ -5,6 +5,8 @@ import com.example.realboard.entity.BoardImage;
 import com.example.realboard.entity.Member;
 import com.example.realboard.repository.BoardImageRepository;
 import com.example.realboard.repository.BoardRepository;
+import com.example.realboard.repository.MemberRepository;
+import com.example.realboard.repository.ReplyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +32,9 @@ public class BoardTests {
 
     @Autowired
     private BoardImageRepository imageRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Test
     public void insertTests(){
@@ -132,6 +139,34 @@ public class BoardTests {
         for (Object[] arr : result){
             System.out.println(Arrays.toString(arr));
         }
+
+    }
+
+    @Transactional
+    @Commit
+    @Test
+    public void testDeleteBoardByMember(){
+
+
+        Long mid = 4L;
+
+        Member member = Member.builder().mid(mid).build();
+
+        List<Board> result = boardRepository.findBoardByMember(member);  // 해당 mid의 board들을 list로 받음
+
+        result.forEach(board ->{
+            //이제 Board객체를 구했으니깐 해당 객체에 있는 BoardImage를 지워줘야함
+            imageRepository.deleteByBoard(board);
+            //리플도 지워야함
+            replyRepository.deleteByBoard(board);
+        });
+
+        //이제 Board 객체를 지우면 됨
+        boardRepository.deleteByMember(member);
+
+
+
+
 
     }
 
