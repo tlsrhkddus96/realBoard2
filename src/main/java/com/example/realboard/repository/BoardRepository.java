@@ -1,6 +1,7 @@
 package com.example.realboard.repository;
 
 import com.example.realboard.entity.Board;
+import com.example.realboard.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,13 +41,16 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     Page<Object[]> getBoardWithReplyCount(Pageable pageable);
 
 
-    //조회화면에 필요한 Board, Image, Member
+    //조회화면에 필요한 Board, Image, Member 92p>reply추가시
     @Query("select b,bi,m " +
             "from Board b " +
             "left join b.member m " +
             "left join BoardImage bi on bi.board = b " +
             "where b.bno = :bno")
     List<Object[]> getBoardWithAll(Long bno);
+
+    //mid로 게시물 삭제
+    void deleteByMember(Member member);
 
 
 }
