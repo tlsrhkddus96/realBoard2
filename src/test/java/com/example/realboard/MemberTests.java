@@ -76,7 +76,7 @@ public class MemberTests {
         //member가 작성한 board들의 image,reply가 삭제됐으니 board객체도 삭제
         boardRepository.deleteByMember(member);
 
-        //해당member는 이제 fk로 잡혀져있는게 없으니 바로삭제 ㅋㅋ
+        //해당member는 이제 fk로 잡혀져있는게 없으니 바로삭제
         memberRepository.deleteById(mid);
 
 
