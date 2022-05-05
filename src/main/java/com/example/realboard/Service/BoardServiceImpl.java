@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService{
 
         log.info(boardDTO);
 
+
         Map<String,Object> entityMap = dtoToEntity(boardDTO);
 
         Board board = (Board) entityMap.get("board");

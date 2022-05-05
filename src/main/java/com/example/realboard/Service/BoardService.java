@@ -52,6 +52,7 @@ public interface BoardService {
             entityMap.put("imgList", boardImageList);
         }
 
+
         return entityMap;
 
     }
