@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/example :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">Board Read</h1>
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Content</label>
+                <textarea class="form-control" rows="5" name="content" th:value="${dto.content}" readonly ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Writer</label>
+                <input type="text" class="form-control" name="nickname" th:value="${dto.nickname}" readonly >
+            </div>
+
+
+            <div class="uploadResult">
+                <ul>
+                    <li th:each="boardImage: ${dto.imageDTOList}">
+                        <img th:if="${boardImage.path != null}" th:src="|/display?fileName=${boardImage.getThumbnailURL()}|">
+                    </li>
+                </ul>
+            </div>
+
+            <button type="button" class="btn btn-primary">
+                Reply Count <span class="badge badge-light">[[${dto.replyCnt}]]</span>
+            </button>
+
+
+
+
+            <style>
+                .uploadResult{
+                    width: 100%;
+                    background-color: gray;
+                    margin-top: 10px;
+                }
+
+                .uploadResult ul{
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+                    vertical-align: top;
+                    overflow: auto;
+                }
+
+                .uploadResult ul li{
+                    list-style: none;
+                    padding: 10px;
+                    margin-left: 2em;
+                }
+
+                .uploadResult ul li img{
+                    width: 100px;
+                }
+
+            </style>
+
+
+        <script>
+            $(document).ready(function (e){
+
+
+            });
+        </script>
+
+
+    </th:block>
+
+
+</th:block>
+
+</html>

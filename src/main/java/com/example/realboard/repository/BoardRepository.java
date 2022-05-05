@@ -30,7 +30,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     Page<Board> getPagingTests(Pageable pageable);
 
 
-    // 목록화면에 필요한 데이터 Page<>로 받기
+    // 목록
     // Board, Member, count(Reply)
     @Query(value = "select b,m,count (r) " +
             "from Board b " +
@@ -40,12 +40,31 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
              countQuery = "select count (b) from Board b")
     Page<Object[]> getBoardWithReplyCount(Pageable pageable);
 
+    // 목록화면에 필요한 데이터 Page<>로 받기
+    // Board, BoardImage, Member, count(reply)
+    @Query("select b,bi,m,count (r) " +
+            "from Board b " +
+            "left join BoardImage bi on bi.board = b " +
+            "left join b.member m " +
+            "left join Reply r on r.board = b " +
+            "group by b")
+    Page<Object[]> getListPage(Pageable pageable);
 
-    //조회화면에 필요한 Board, Image, Member 92p>reply추가시
+
+/*    //조회화면에 필요한 Board, Image, Member 92p>reply추가시
     @Query("select b,bi,m " +
             "from Board b " +
             "left join b.member m " +
             "left join BoardImage bi on bi.board = b " +
+            "where b.bno = :bno")
+    List<Object[]> getBoardWithAll(Long bno);*/
+
+    //조회화면에 필요한 Board, Image, Member 92p>reply추가시
+    @Query("select b,bi,m, count(r) " +
+            "from Board b " +
+            "left join BoardImage bi on bi.board = b " +
+            "left join b.member m " +
+            "left join Reply r on r.board = b " +
             "where b.bno = :bno")
     List<Object[]> getBoardWithAll(Long bno);
 

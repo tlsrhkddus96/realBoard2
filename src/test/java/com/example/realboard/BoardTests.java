@@ -115,11 +115,11 @@ public class BoardTests {
     }
 
     @Test
-    public void testWithReplyCount(){
+    public void testGetListPage(){
 
         Pageable pageable = PageRequest.of(0,10, Sort.by("ref").descending().and(Sort.by("refOrder").ascending()));
 
-        Page<Object[]> result = boardRepository.getBoardWithReplyCount(pageable);
+        Page<Object[]> result = boardRepository.getListPage(pageable);
 
         result.get().forEach(row -> {
             Object[] arr = (Object[]) row;
@@ -132,7 +132,7 @@ public class BoardTests {
     @Test
     public void testGetBoard(){
 
-        List<Object[]> result = boardRepository.getBoardWithAll(14L);
+        List<Object[]> result = boardRepository.getBoardWithAll(48L);
 
         System.out.println(result);
 
@@ -141,6 +141,7 @@ public class BoardTests {
         }
 
     }
+
 
     @Transactional
     @Commit

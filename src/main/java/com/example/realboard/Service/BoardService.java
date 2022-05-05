@@ -2,6 +2,8 @@ package com.example.realboard.Service;
 
 import com.example.realboard.dto.BoardDTO;
 import com.example.realboard.dto.BoardImageDTO;
+import com.example.realboard.dto.PageRequestDTO;
+import com.example.realboard.dto.PageResultDTO;
 import com.example.realboard.entity.Board;
 import com.example.realboard.entity.BoardImage;
 import com.example.realboard.entity.Member;
@@ -14,6 +16,41 @@ import java.util.stream.Collectors;
 public interface BoardService {
 
     Long register(BoardDTO boardDTO);
+
+    PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO requestDTO);
+
+    BoardDTO getBoard(Long bno);
+
+
+    default BoardDTO entitiesToDTO(Board board,List<BoardImage> boardImages, Member member, Long replyCnt){
+
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(board.getBno())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .mid(member.getMid())
+                .nickname(member.getNickname())
+                .replyCnt(replyCnt.intValue())
+                .build();
+
+        //이미지 List로
+        List<BoardImageDTO> boardImageDTOList = boardImages.stream().map(boardImage -> {
+
+            return BoardImageDTO.builder()
+                    .imgName(boardImage.getImageName())
+                    .path(boardImage.getPath())
+                    .uuid(boardImage.getUuid())
+                    .build();
+        }).collect(Collectors.toList());
+
+        boardDTO.setImageDTOList(boardImageDTOList);
+        //boardDTO.setReplyCnt(replyCnt.intValue());
+
+        return boardDTO;
+
+    }
 
 
     //Board객체와 BoardImage객체를 같이 처리하기 위해 Map타입 사용
@@ -54,6 +91,25 @@ public interface BoardService {
 
 
         return entityMap;
+
+    }
+
+
+
+    default BoardDTO entitiesToDTONo(Board board, Member member, Long replyCnt){
+
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(board.getBno())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .mid(member.getMid())
+                .nickname(member.getNickname())
+                .replyCnt(replyCnt.intValue())
+                .build();
+
+        return boardDTO;
 
     }
 

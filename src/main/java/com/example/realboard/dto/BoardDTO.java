@@ -1,5 +1,6 @@
 package com.example.realboard.dto;
 
+import com.example.realboard.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,10 @@ public class BoardDTO {
    //private String nickname; // 멤버의 닉네임
 
     private LocalDateTime regDate, modDate;
+
+    //페이징에 필요한 Member의 nickname, count(Reply) int
+    private int replyCnt;
+    private String nickname;
 
     @Builder.Default
     private List<BoardImageDTO> imageDTOList = new ArrayList<>();

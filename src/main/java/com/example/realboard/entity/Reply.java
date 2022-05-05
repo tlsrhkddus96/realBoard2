@@ -25,5 +25,10 @@ public class Reply extends BaseEntity{
     private Member member;
 
 
+    public void changeText(String text){
+        this.text = text;
+    }
+
+
 
 }
