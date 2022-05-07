@@ -60,4 +60,32 @@ public class BoardController {
 
     }
 
+    @PostMapping("/remove")
+    public String remove(Long bno, RedirectAttributes redirectAttributes){
+
+        log.info("bno : " + bno);
+
+        boardService.removeBoard(bno);
+
+        redirectAttributes.addFlashAttribute("msg",bno);
+
+        return "redirect:/board/list";
+
+    }
+
+    @PostMapping("/modify")
+    public String modify(BoardDTO boardDTO, @ModelAttribute("requestDTO")PageRequestDTO requestDTO,
+                         RedirectAttributes redirectAttributes){
+
+        log.info("boardDTO : " + boardDTO);
+
+        boardService.modifyBoard(boardDTO);
+
+        redirectAttributes.addAttribute("page",requestDTO.getPage());
+        redirectAttributes.addAttribute("bno",boardDTO.getBno());
+
+        return "redirect:/board/read";
+
+    }
+
 }

@@ -24,8 +24,6 @@ public class BoardDTO {
 
     private Long mid; // 멤버의 id값
 
-   //private String nickname; // 멤버의 닉네임
-
     private LocalDateTime regDate, modDate;
 
     //페이징에 필요한 Member의 nickname, count(Reply) int

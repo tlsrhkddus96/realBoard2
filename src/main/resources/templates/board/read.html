@@ -7,13 +7,18 @@
         <h1 class="mt-4">Board Read</h1>
 
             <div class="form-group">
+                <label>bno</label>
+                <input type="text" class="form-control" name="bno" th:value="${dto.bno}" readonly>
+            </div>
+
+            <div class="form-group">
                 <label>Title</label>
                 <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
             </div>
 
             <div class="form-group">
                 <label>Content</label>
-                <textarea class="form-control" rows="5" name="content" th:value="${dto.content}" readonly ></textarea>
+                <textarea class="form-control" rows="5" name="content" readonly >[[${dto.content}]]</textarea>
             </div>
 
             <div class="form-group">
@@ -29,6 +34,14 @@
                     </li>
                 </ul>
             </div>
+
+            <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}">
+                <button type="button" class="btn btn-primary">Modify</button>
+            </a>
+
+            <a th:href="@{/board/list(page=${requestDTO.page})}">
+                <button type="button" class="btn btn-info">List</button>
+            </a>
 
             <button type="button" class="btn btn-primary">
                 Reply Count <span class="badge badge-light">[[${dto.replyCnt}]]</span>
@@ -72,6 +85,7 @@
 
             });
         </script>
+
 
 
     </th:block>

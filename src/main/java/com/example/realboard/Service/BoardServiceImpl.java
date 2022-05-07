@@ -8,6 +8,7 @@ import com.example.realboard.entity.BoardImage;
 import com.example.realboard.entity.Member;
 import com.example.realboard.repository.BoardImageRepository;
 import com.example.realboard.repository.BoardRepository;
+import com.example.realboard.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,8 @@ public class BoardServiceImpl implements BoardService{
     private final BoardRepository boardRepository;
 
     private final BoardImageRepository imageRepository;
+
+    private final ReplyRepository replyRepository;
 
     @Transactional
     @Override
@@ -91,40 +94,62 @@ public class BoardServiceImpl implements BoardService{
 
         List<Object[]> result = boardRepository.getBoardWithAll(bno);
 
+        // getBoardWithAll >> Board, BoardImage, Member, (count)Reply 오브젝트 배열로 모아둠
+        Board board = (Board) result.get(0)[0];
+        Member member = (Member) result.get(0)[2];
+        Long replyCnt = (Long) result.get(0)[3];
+
+        log.info("board " + board);
+        log.info("member " + member);
+        log.info("replyCnt " + replyCnt);
+        log.info("result[1]" + result.get(0)[1]);
+
         if(result.get(0)[1]!=null) { //해당 게시물에 이미지가 있을 경우
-
-            Board board = (Board) result.get(0)[0];
-
+            
             List<BoardImage> boardImageList = new ArrayList<>();
             result.forEach(arr -> {
                 BoardImage boardImage = (BoardImage) arr[1];
                 boardImageList.add(boardImage);
             });
 
-            Member member = (Member) result.get(0)[2];
-            Long replyCnt = (Long) result.get(0)[3];
-
-            log.info("board " + board);
             log.info("boardImage" + boardImageList);
-            log.info("member " + member);
-            log.info("replyCnt " + replyCnt);
-            log.info("result[1]" + result.get(0)[1]);
-
 
             return entitiesToDTO(board, boardImageList, member, replyCnt);
+
         }else { //해당 게시물에 이미지가 없을 경우
 
-            Board board = (Board) result.get(0)[0];
-            Member member = (Member) result.get(0)[2];
-            Long replyCnt = (Long) result.get(0)[3];
-
-            log.info("board " + board);
-            log.info("member " + member);
-            log.info("replyCnt " + replyCnt);
-            log.info("result[1]" + result.get(0)[1]);
-
             return entitiesToDTONo(board,member,replyCnt);
+
         }
+
+    }
+
+    @Transactional
+    @Override
+    public void removeBoard(Long bno) {
+
+        Board board = Board.builder().bno(bno).build();
+
+        replyRepository.deleteByBoard(board);   //해당 board의 reply삭제
+        imageRepository.deleteByBoard(board);   //해당 board의 image삭제
+        boardRepository.deleteById(bno);        //해당 bno 테이블 삭제
+
+    }
+
+    @Transactional
+    @Override
+    public void modifyBoard(BoardDTO boardDTO) {
+
+      //Board board = Board.builder().bno(boardDTO.getBno()).build();
+
+        Long bno = boardDTO.getBno();
+
+        Board board = boardRepository.findBoardByBno(bno);
+
+        board.changeTitle(boardDTO.getTitle());
+        board.changeContent(boardDTO.getContent());
+
+        boardRepository.save(board);
 
     }
 }

@@ -36,10 +36,14 @@ public class Board extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+    public void changeTitle(String title){
+        this.title = title;
+    }
 
-/*    public void changeRef(Long ref){
-        this.ref=ref;
-    }*/
+    public void changeContent(String content){
+        this.content = content;
+    }
+
 
 
 

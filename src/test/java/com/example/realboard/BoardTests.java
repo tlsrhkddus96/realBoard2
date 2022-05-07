@@ -132,7 +132,7 @@ public class BoardTests {
     @Test
     public void testGetBoard(){
 
-        List<Object[]> result = boardRepository.getBoardWithAll(48L);
+        List<Object[]> result = boardRepository.getBoardWithAll(55L);
 
         System.out.println(result);
 

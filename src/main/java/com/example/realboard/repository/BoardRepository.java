@@ -65,7 +65,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
             "left join BoardImage bi on bi.board = b " +
             "left join b.member m " +
             "left join Reply r on r.board = b " +
-            "where b.bno = :bno")
+            "where b.bno = :bno group by bi" )
     List<Object[]> getBoardWithAll(Long bno);
 
     //member객체를 사용하는 게시물 삭제
@@ -77,6 +77,11 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     //어떤 member를 사용하는 board전부 불러오기
     @Query("select b from Board b where b.member = :member")
     List<Board> findBoardByMember(Member member);
+
+    //bno값으로 Board객체 가져오기
+    @Query("select b from Board b where b.bno = :bno")
+    Board findBoardByBno(Long bno);
+
 
 
 
