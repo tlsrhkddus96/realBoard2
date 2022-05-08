@@ -25,6 +25,8 @@ public interface BoardService {
 
     void modifyBoard(BoardDTO boardDTO);
 
+    void modifyBoardTest(BoardDTO boardDTO);
+
 
     default BoardDTO entitiesToDTO(Board board,List<BoardImage> boardImages, Member member, Long replyCnt){
 

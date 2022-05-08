@@ -16,6 +16,12 @@ public interface BoardImageRepository extends JpaRepository<BoardImage, Long> {
     void deleteByBoard(Board board);
 
 
+    //uuid를 통해 BoardImage 삭제
+    @Modifying
+    @Query("delete from BoardImage bi where bi.uuid = :uuid")
+    void deleteByUuid(String uuid);
+
+
 
 
 

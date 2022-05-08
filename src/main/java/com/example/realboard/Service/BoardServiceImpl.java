@@ -152,4 +152,30 @@ public class BoardServiceImpl implements BoardService{
         boardRepository.save(board);
 
     }
+
+    @Transactional
+    @Override
+    public void modifyBoardTest(BoardDTO boardDTO) {
+
+        log.info(boardDTO);
+
+        Map<String,Object> entityMap = dtoToEntity(boardDTO);
+
+        Board board = (Board) entityMap.get("board");
+
+        board.changeTitle(boardDTO.getTitle());
+        board.changeContent(boardDTO.getContent());
+
+        boardRepository.save(board);
+        boardRepository.updateRef(board.getBno());
+
+        List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
+
+        if ((List<BoardImage>)entityMap.get("imgList") !=null){ //이미지가 있을경우만
+            boardImageList.forEach(boardImage -> {
+                imageRepository.save(boardImage);
+            });
+        }
+
+    }
 }

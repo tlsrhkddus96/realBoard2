@@ -79,7 +79,7 @@ public class BoardController {
 
         log.info("boardDTO : " + boardDTO);
 
-        boardService.modifyBoard(boardDTO);
+        boardService.modifyBoardTest(boardDTO);
 
         redirectAttributes.addAttribute("page",requestDTO.getPage());
         redirectAttributes.addAttribute("bno",boardDTO.getBno());
