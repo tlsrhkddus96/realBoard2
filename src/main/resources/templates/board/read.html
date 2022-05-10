@@ -29,7 +29,7 @@
 
             <div class="uploadResult">
                 <ul>
-                    <li th:each="boardImage: ${dto.imageDTOList}">
+                    <li th:each="boardImage: ${dto.imageDTOList}" th:data-file="${boardImage.getThumbnailURL()}">
                         <img th:if="${boardImage.path != null}" th:src="|/display?fileName=${boardImage.getThumbnailURL()}|">
                     </li>
                 </ul>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary closeBtn" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary replySaveBtn">Save Changes</button>
                             <button type="button" class="btn btn-warning modifyBtn">Modify</button>
                             <button type="button" class="btn btn-danger removeBtn">Remove</button>
@@ -101,7 +101,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary closeBtn" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -144,10 +144,18 @@
 
                 let bno = [[${dto.bno}]];
 
+                let imageModal = $(".imageModal");
                 let replyModal = $(".replyModal");
                 let inputMid = $('input[name="mid"]');
                 let inputText = $('input[name="text"]');
                 let replyNum;
+
+                $(".closeBtn").click(function (){
+
+                    replyModal.modal("hide");
+                    imageModal.modal("hide");
+
+                })
 
                 /* add Reply */
                 $(".addReplyBtn").click(function (){
@@ -159,9 +167,10 @@
                     $('.replySaveBtn').show();
 
                     replyModal.modal('show');
+                    imageModal.modal('hide');
 
                 });
-                /* end add Reply */
+                /* End add Reply */
 
 
                 /* save Reply Btn */
@@ -299,7 +308,19 @@
                 /* End Remove Reply */
 
 
+                /* Click Picture */
+                $(".uploadResult li").click(function (){
 
+                    let file = $(this).data('file');
+
+                    console.log(file);
+
+                    $('.imageModal .modal-body').html("<img style='width:100%' src='/display?fileName="+file+"&size=1'>");
+
+                    $('.imageModal').modal("show");
+
+                })
+                /* End Click Picture */
 
 
             }); //document Ready
