@@ -46,7 +46,67 @@
             <button type="button" class="btn btn-primary">
                 Reply Count <span class="badge badge-light">[[${dto.replyCnt}]]</span>
             </button>
+            <button type="button" class="btn btn-info addReplyBtn">
+                Reply Register
+            </button>
 
+            <div class="list-group replyList">
+
+            </div>
+
+
+            <!-- Reply Modal -->
+            <div class="replyModal modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Board Reply</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Replyer ID</label>
+                                <input type="text" class="form-control" name="mid">
+                            </div>
+                            <div class="form-group">
+                                <label>Reply Text</label>
+                                <input type="text" class="form-control" name="text">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary replySaveBtn">Save Changes</button>
+                            <button type="button" class="btn btn-warning modifyBtn">Modify</button>
+                            <button type="button" class="btn btn-danger removeBtn">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Reply Modal -->
+
+
+            <!-- Image Modal -->
+            <div class="imageModal modal" tabindex="-2" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Picture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Image Modal -->
 
 
 
@@ -82,8 +142,167 @@
         <script>
             $(document).ready(function (e){
 
+                let bno = [[${dto.bno}]];
 
-            });
+                let replyModal = $(".replyModal");
+                let inputMid = $('input[name="mid"]');
+                let inputText = $('input[name="text"]');
+                let replyNum;
+
+                /* add Reply */
+                $(".addReplyBtn").click(function (){
+
+                    inputMid.val('');
+                    inputText.val('');
+
+                    $('.removeBtn , .modifyBtn ').hide();
+                    $('.replySaveBtn').show();
+
+                    replyModal.modal('show');
+
+                });
+                /* end add Reply */
+
+
+                /* save Reply Btn */
+                $('.replySaveBtn').click(function (){
+
+                    let data = {bno:bno, text:inputText.val(), mid:inputMid.val()};
+                    console.log(data);
+
+                    $.ajax({
+
+                        url : '/reply/'+bno,
+                        type : 'POST',
+                        data : JSON.stringify(data),
+                        contentType : 'application/json; charset=utf-8',
+                        dataType : "text",
+                        success : function (result){
+
+                            console.log("result : " + result);
+                            self.location.reload();
+
+                        }
+
+                    });
+                    replyModal.modal('hide');
+                });
+                /* End save Reply Btn */
+
+                /* 페이지가 열리면 댓글 데이터 바로 가져오기 */
+                getBoardReplies();
+                function getBoardReplies(){
+
+                    //날짜 양식
+                    function formatTime(str){
+
+                        let date = new Date(str);
+
+                        return date.getFullYear() + '/' +
+                            (date.getMonth()+1) + '/' +
+                            date.getDate() + ' ' +
+                            date.getHours() + ':' +
+                            date.getMinutes();
+                    }
+
+                    $.getJSON("/reply/"+bno+"/all",function (arr){
+
+                        let str = "";
+
+                        $.each(arr, function (idx, reply){
+
+                            console.log(reply);
+
+                            str += '<div class="card-body" data-replyNum='+reply.replyNum+' data-mid='+reply.mid+'>';
+                            str += '<h5 class="card-title">'+reply.text+'</h5>';
+                            str += '<h6 class="card-subtitle mb-2 text-muted">'+reply.nickname+'</h6>';
+                            str += '<p class="card-text">'+formatTime(reply.regDate)+'</p>';
+                            str += '</div>';
+                        });
+
+                        $(".replyList").html(str);
+                    });
+                }
+                /* End getBoardReplies */
+
+
+
+                /* reply List Click */
+                $(".replyList").on("click",".card-body",function (){
+
+                    $(".replySaveBtn").hide();
+                    $(".removeBtn , .modifyBtn").show();
+
+                    let targetReply = $(this);
+                    replyNum = targetReply.data("replynum");
+
+                    console.log("replyNum : " + replyNum);
+                    inputMid.val(targetReply.data("mid"));
+                    inputText.val(targetReply.find('.card-title').clone().children().remove().end().text());
+
+                    $('.replyModal').modal('show');
+
+                });
+                /* End reply List Click */
+
+
+                /* Modify Reply */
+                $(".modifyBtn").on("click", function (){
+
+                    let data = {replyNum:replyNum, bno:bno, text:inputText.val(), mid:inputMid.val()};
+
+                    console.log(data);
+
+                    $.ajax({
+
+                        url:'/reply/'+bno+'/'+replyNum,
+                        type: 'PUT',
+                        data:JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "text",
+                        success: function (result){
+
+                            console.log("result" + result);
+                            self.location.reload();
+
+                        }
+                    })
+                    replyModal.modal("hide");
+                });
+                /* End Modify Reply */
+
+
+                /* Remove Reply */
+                $(".removeBtn").on("click",function (){
+
+                    let data = {replyNum:replyNum};
+
+                    console.log(data);
+
+                    $.ajax({
+
+                        url:'/reply/'+bno+'/'+replyNum,
+                        type:'DELETE',
+                        contentType:"application/json; charset=utf-8",
+                        dataType:"text",
+                        success:function (result){
+
+                            console.log("result : " + result);
+                            self.location.reload();
+
+                        }
+
+                    });
+                    replyModal.modal("hide");
+
+                });
+                /* End Remove Reply */
+
+
+
+
+
+            }); //document Ready
         </script>
 
 
