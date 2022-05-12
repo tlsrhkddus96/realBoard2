@@ -17,10 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -177,5 +174,35 @@ public class BoardServiceImpl implements BoardService{
             });
         }
 
+    }
+
+    @Override
+    public Long kidRegister(BoardDTO boardDTO) {
+
+        log.info(boardDTO);
+
+        Board parentBoard = boardRepository.findBoardByBno(boardDTO.getParentNum());
+        log.info("parentBoard : " + parentBoard);
+
+        Map<String,Object> entityMap = kidDtoToEntity(boardDTO,parentBoard);
+
+        Board board = (Board) entityMap.get("board");
+        List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
+
+
+        boardRepository.save(board);
+        //boardRepository.updateRef(board.getBno()); // Ref bno와 맞추기
+
+        if ((List<BoardImage>)entityMap.get("imgList") !=null){ //이미지가 있을경우만
+            boardImageList.forEach(boardImage -> {
+                imageRepository.save(boardImage);
+            });
+        }
+
+/*        boardImageList.forEach(boardImage -> {
+            imageRepository.save(boardImage);
+        });*/
+
+        return board.getBno();
     }
 }

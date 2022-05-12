@@ -30,6 +30,12 @@ public class BoardDTO {
     private int replyCnt;
     private String nickname;
 
+    private Long parentNum;
+    private int ref;
+    private int refOrder;
+
+    private int step;
+
     @Builder.Default
     private List<BoardImageDTO> imageDTOList = new ArrayList<>();
 

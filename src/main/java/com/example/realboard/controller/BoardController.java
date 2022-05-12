@@ -88,4 +88,24 @@ public class BoardController {
 
     }
 
+    @GetMapping("/kidRegister")
+    public void kidRegister(@ModelAttribute("parentNum") Long parentNum){
+
+        log.info(parentNum);
+
+
+    }
+
+    @PostMapping("/kidRegister")
+    public String kidRegister(BoardDTO boardDTO,RedirectAttributes redirectAttributes){
+
+        log.info("boardDTO : " + boardDTO);
+
+        Long bno = boardService.kidRegister(boardDTO);
+        redirectAttributes.addFlashAttribute("msg",bno);
+
+        return "redirect:/board/list";
+
+    }
+
 }

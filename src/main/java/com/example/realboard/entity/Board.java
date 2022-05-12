@@ -22,7 +22,7 @@ public class Board extends BaseEntity{
 
     private String content;
 
-    private Long ref;
+    private int ref;
 
     @Column(columnDefinition = "integer default 0")
     private int step;
@@ -30,8 +30,8 @@ public class Board extends BaseEntity{
     @Column(columnDefinition = "integer default 0")
     private int refOrder;
 
-    @Column(columnDefinition = "integer default 0")
-    private int parentNum;
+    @Column(columnDefinition = "long default 0")
+    private Long parentNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
@@ -43,6 +43,7 @@ public class Board extends BaseEntity{
     public void changeContent(String content){
         this.content = content;
     }
+
 
 
 

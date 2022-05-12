@@ -4,10 +4,11 @@
 
     <th:block th:fragment="content">
 
-        <h1 class="mt-4">Board Register</h1>
+        <h1 class="mt-4">Kid Register</h1>
 
-        <form th:action="@{/board/register}" th:method="post">
+        <form th:action="@{/board/kidRegister}" th:method="post">
 
+            <input type="hidden" name="parentNum" th:value="${parentNum}">
 
             <div class="form-group">
                 <label>Title</label>

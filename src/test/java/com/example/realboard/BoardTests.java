@@ -46,7 +46,7 @@ public class BoardTests {
             Board board = Board.builder()
                     .content("임시"+i)
                     .title("임시제목"+i)
-                    .ref(i)
+                    .ref((int) i)
                     .member(member)
                     .build();
             boardRepository.save(board);
@@ -84,7 +84,7 @@ public class BoardTests {
         Board board = Board.builder()
                 .title(" Re : " + parentBoard.get().getTitle())
                 .content("dd")
-                .parentNum(parentBoard.get().getBno().intValue())
+                .parentNum(parentBoard.get().getBno())
                 .ref(parentBoard.get().getRef())
                 .step(parentBoard.get().getStep()+1)
                 .refOrder(parentBoard.get().getRefOrder()+1)
@@ -168,6 +168,23 @@ public class BoardTests {
 
 
 
+
+    }
+
+    @Test
+    public void testRefParentNum(){
+
+        Long bno =58L;
+        Long parentNum=12L;
+
+        boardRepository.updateRefParentNum(bno,parentNum);
+
+    }
+
+    @Test
+    public void testParentBoard(){
+
+        boardRepository.findBoardByBno(58L);
 
     }
 
