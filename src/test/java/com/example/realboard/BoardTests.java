@@ -84,7 +84,7 @@ public class BoardTests {
         Board board = Board.builder()
                 .title(" Re : " + parentBoard.get().getTitle())
                 .content("dd")
-                .parentNum(parentBoard.get().getBno())
+                .parentNum(parentBoard.get().getBno().intValue())
                 .ref(parentBoard.get().getRef())
                 .step(parentBoard.get().getStep()+1)
                 .refOrder(parentBoard.get().getRefOrder()+1)
@@ -184,7 +184,10 @@ public class BoardTests {
     @Test
     public void testParentBoard(){
 
-        boardRepository.findBoardByBno(58L);
+        int ref = 157;
+
+
+        System.out.println("max REFOrder :" + boardRepository.findMaxRefOrder(ref));
 
     }
 

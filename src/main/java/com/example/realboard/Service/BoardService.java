@@ -38,6 +38,7 @@ public interface BoardService {
                 .bno(board.getBno())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .ref(board.getRef())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
                 .mid(member.getMid())
@@ -74,7 +75,6 @@ public interface BoardService {
                 .bno(boardDTO.getBno())
                 .title(boardDTO.getTitle())
                 .content(boardDTO.getContent())
-                .parentNum(boardDTO.getParentNum())
                 .member(member)
                 .build();
 
@@ -113,6 +113,7 @@ public interface BoardService {
                 .bno(board.getBno())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .ref(board.getRef())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
                 .mid(member.getMid())
@@ -124,7 +125,7 @@ public interface BoardService {
 
     }
 
-    default Map<String, Object> kidDtoToEntity(BoardDTO boardDTO, Board parentBoard){
+    default Map<String, Object> kidDtoToEntity(BoardDTO boardDTO, Board parentBoard,int maxRefOrder){
 
         Map<String,Object> entityMap = new HashMap<>();
 
@@ -137,13 +138,10 @@ public interface BoardService {
 
 /*                .parentNum(boardDTO.getParentNum()) //해당 게시물의 bno == parentNum
                 .ref(parentBoard.getRef())*/
-                
-                /*유튜브 보고 다시 만들자.. ㅅㅂ*/
 
-                .parentNum(parentBoard.getParentNum())
+                .parentNum(parentBoard.getBno().intValue())
                 .ref(parentBoard.getRef())
-
-                .refOrder(parentBoard.getRefOrder()+1)
+                .refOrder(maxRefOrder+1)
                 .step(parentBoard.getStep()+1)
                 .member(member)
                 .build();
@@ -177,3 +175,4 @@ public interface BoardService {
 
 
 }
+

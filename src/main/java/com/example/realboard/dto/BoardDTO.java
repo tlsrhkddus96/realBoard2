@@ -30,7 +30,7 @@ public class BoardDTO {
     private int replyCnt;
     private String nickname;
 
-    private Long parentNum;
+    private int parentNum;
     private int ref;
     private int refOrder;
 

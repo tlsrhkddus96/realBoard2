@@ -30,8 +30,8 @@ public class Board extends BaseEntity{
     @Column(columnDefinition = "integer default 0")
     private int refOrder;
 
-    @Column(columnDefinition = "long default 0")
-    private Long parentNum;
+    @Column(columnDefinition = "integer default 0")
+    private int parentNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;

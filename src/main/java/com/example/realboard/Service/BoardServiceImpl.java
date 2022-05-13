@@ -181,17 +181,19 @@ public class BoardServiceImpl implements BoardService{
 
         log.info(boardDTO);
 
-        Board parentBoard = boardRepository.findBoardByBno(boardDTO.getParentNum());
+        Integer maxRefOrder = boardRepository.findMaxRefOrder(boardDTO.getRef());
+        log.info("max RefOrder : " + maxRefOrder);
+
+        Board parentBoard = boardRepository.findBoardByBno((long)boardDTO.getParentNum());
         log.info("parentBoard : " + parentBoard);
 
-        Map<String,Object> entityMap = kidDtoToEntity(boardDTO,parentBoard);
+        Map<String,Object> entityMap = kidDtoToEntity(boardDTO,parentBoard,maxRefOrder);
 
         Board board = (Board) entityMap.get("board");
         List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
 
 
         boardRepository.save(board);
-        //boardRepository.updateRef(board.getBno()); // Ref bno와 맞추기
 
         if ((List<BoardImage>)entityMap.get("imgList") !=null){ //이미지가 있을경우만
             boardImageList.forEach(boardImage -> {

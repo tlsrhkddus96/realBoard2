@@ -17,7 +17,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     //ref 테스트 ++ parentNum 추가
     @Transactional
     @Modifying
-    @Query("update Board b set b.ref = b.bno, b.parentNum = b.bno where b.bno = :bno")
+    @Query("update Board b set b.ref = b.bno where b.bno = :bno")
     void updateRef(@Param("bno") Long bno);
 
     //답글 작성시 ref값 동일, parentNum 동일하게 맞추기
@@ -85,6 +85,11 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     Board findBoardByBno(Long bno);
 
 
+    @Query("select max(b.refOrder) from Board b where b.ref =:ref")
+    Integer findMaxRefOrder(int ref);
+
+    @Query("update Board b set b.refOrder = b.refOrder+1 where b.refOrder > :asd and b.ref =:bcd")
+    void updateRefOrder(int asd, int bdc);
 
 
 

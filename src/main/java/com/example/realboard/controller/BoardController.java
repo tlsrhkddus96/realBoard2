@@ -89,7 +89,10 @@ public class BoardController {
     }
 
     @GetMapping("/kidRegister")
-    public void kidRegister(@ModelAttribute("parentNum") Long parentNum){
+    public void kidRegister(Model model,int parentNum, int ref){
+
+        model.addAttribute("parentNum",parentNum);
+        model.addAttribute("ref",ref);
 
         log.info(parentNum);
 
