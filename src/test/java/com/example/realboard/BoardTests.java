@@ -181,16 +181,6 @@ public class BoardTests {
 
     }
 
-    @Test
-    public void testParentBoard(){
-
-        int ref = 157;
-
-
-        System.out.println("max REFOrder :" + boardRepository.findMaxRefOrder(ref));
-
-    }
-
 
 
 }

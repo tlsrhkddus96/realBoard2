@@ -125,7 +125,7 @@ public interface BoardService {
 
     }
 
-    default Map<String, Object> kidDtoToEntity(BoardDTO boardDTO, Board parentBoard,int maxRefOrder){
+    default Map<String, Object> kidDtoToEntity(BoardDTO boardDTO, Board parentBoard){
 
         Map<String,Object> entityMap = new HashMap<>();
 
@@ -133,7 +133,7 @@ public interface BoardService {
 
         Board board = Board.builder()
                 .bno(boardDTO.getBno())
-                .title("\tRe :"+boardDTO.getTitle())
+                .title("Re :"+boardDTO.getTitle())
                 .content(boardDTO.getContent())
 
 /*                .parentNum(boardDTO.getParentNum()) //해당 게시물의 bno == parentNum
@@ -141,7 +141,7 @@ public interface BoardService {
 
                 .parentNum(parentBoard.getBno().intValue())
                 .ref(parentBoard.getRef())
-                .refOrder(maxRefOrder+1)
+                .refOrder(parentBoard.getRefOrder()+1)
                 .step(parentBoard.getStep()+1)
                 .member(member)
                 .build();

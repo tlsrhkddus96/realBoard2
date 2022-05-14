@@ -176,22 +176,24 @@ public class BoardServiceImpl implements BoardService{
 
     }
 
+    @Transactional
     @Override
     public Long kidRegister(BoardDTO boardDTO) {
 
-        log.info(boardDTO);
-
-        Integer maxRefOrder = boardRepository.findMaxRefOrder(boardDTO.getRef());
-        log.info("max RefOrder : " + maxRefOrder);
+        log.info("BoardDTO : " +boardDTO);
 
         Board parentBoard = boardRepository.findBoardByBno((long)boardDTO.getParentNum());
         log.info("parentBoard : " + parentBoard);
 
-        Map<String,Object> entityMap = kidDtoToEntity(boardDTO,parentBoard,maxRefOrder);
+        int ref = parentBoard.getRef();
+        int refOrder = parentBoard.getRefOrder();
+
+        boardRepository.updateRefOrder(ref,refOrder);
+
+        Map<String,Object> entityMap = kidDtoToEntity(boardDTO,parentBoard);
 
         Board board = (Board) entityMap.get("board");
         List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
-
 
         boardRepository.save(board);
 

@@ -2,6 +2,7 @@ package com.example.realboard;
 
 import com.example.realboard.entity.Board;
 import com.example.realboard.entity.Member;
+import com.example.realboard.entity.MemberRole;
 import com.example.realboard.repository.BoardImageRepository;
 import com.example.realboard.repository.BoardRepository;
 import com.example.realboard.repository.MemberRepository;
@@ -9,6 +10,7 @@ import com.example.realboard.repository.ReplyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
@@ -30,16 +32,22 @@ public class MemberTests {
     @Autowired
     private BoardImageRepository imageRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     public void insertMember(){
 
-        IntStream.rangeClosed(1,30).forEach(i-> {
+        IntStream.rangeClosed(61,70).forEach(i-> {
 
             Member member = Member.builder()
                     .email("user"+i+"@naver.com")
                     .nickname("user"+i)
-                    .password("1111")
+                    .password(passwordEncoder.encode("1111"))
                     .build();
+
+            //default Role
+            member.addMemberRole(MemberRole.ADMIN);
 
             memberRepository.save(member);
 
