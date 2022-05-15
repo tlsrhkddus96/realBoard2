@@ -2,7 +2,7 @@ package com.example.realboard.security.service;
 
 import com.example.realboard.entity.Member;
 import com.example.realboard.repository.MemberRepository;
-import com.example.realboard.security.MemberDTO;
+import com.example.realboard.security.AuthMemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,17 +37,22 @@ public class MemberUserService implements UserDetailsService {
 
         Member member = result.get();
 
+        log.info("member = " + member);
+
         //Member를 UserDetails 타입으로 처리하기 위해 MemberDTO 타입으로 변환
-        MemberDTO memberDTO = new MemberDTO(
+        AuthMemberDTO authMemberDTO = new AuthMemberDTO(
                 member.getEmail(),
                 member.getPassword(),
                 member.getRoleSet().stream()
                         .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name())).collect(Collectors.toSet())
         );
-        memberDTO.setEmail(member.getEmail());
+
+        log.info("AuthMemberDTO : " + authMemberDTO);
+
+        authMemberDTO.setEmail(member.getEmail());
         //MemberRole은 스프링 시큐리티에서 사용하는 SimpleGranted...로 변환, "ROLE_" 이라는 접두어를 추가해서 사용
 
-        return memberDTO;
+        return authMemberDTO;
 
     }
 }

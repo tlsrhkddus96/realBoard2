@@ -27,8 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/dd").authenticated();
 
-        http.formLogin(); // 인가/인증 문제시 로그인화면으로
-       // .loginPage("/member/login");
+        http.formLogin()
+                .successForwardUrl("/board/list")
+                .defaultSuccessUrl("/board/list"); // 인가/인증 문제시 로그인화면으로
+
 
         http.csrf().disable();
         http.logout().logoutSuccessUrl("/board/list");

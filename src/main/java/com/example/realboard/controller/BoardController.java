@@ -5,6 +5,7 @@ import com.example.realboard.dto.BoardDTO;
 import com.example.realboard.dto.PageRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public void register(){
 

@@ -13,7 +13,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-public class MemberDTO extends User {
+public class AuthMemberDTO extends User {
 
     private Long mid;
 
@@ -23,12 +23,13 @@ public class MemberDTO extends User {
 
 
 
-    public MemberDTO(String username, String password,
+    public AuthMemberDTO(String username,
+                         String password,
                      Collection<? extends GrantedAuthority> authorities) {
 
         super(username, password, authorities);
 
-        this.email = username; //일단 pk는 아닌데 흠..(mid)
+        this.email = username;
 
     }
 }

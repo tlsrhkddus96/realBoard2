@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 public class Member extends BaseEntity{
 
     @Id
