@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security" >
+
 <th:block th:replace="~{/layout/example :: setContent(~{this::content} )}">
 
     <th:block th:fragment="content">
@@ -10,6 +11,8 @@
                 <label>Email</label>
                 <input type="text" class="form-control" name="email" th:value="${dto.email}" readonly>
             </div>
+
+            <div sec:authentication="name"></div>
 
         <!-- div sec:authroize 쓰자 시발-->
 
