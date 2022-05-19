@@ -53,13 +53,19 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/my")
     public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model){
+                    //@Authentication으로 로그인된 계정의 DTO 가져옴
 
         String email = authMemberDTO.getEmail();
 
-        memberService.getMember(email);
+        log.info( " email  : " + email);
 
-        model.addAttribute("dto",authMemberDTO);
+        //로그인된 계정의 이메일로 findBy쿼리 진행
+        MemberDTO dto =  memberService.getMember(email);
 
+        log.info("dto : " + dto);
+
+        //"dto" 에 데이터를 넣어주고 화면에 해당 값들을 띄움
+        model.addAttribute("dto", dto);
 
 
     }
