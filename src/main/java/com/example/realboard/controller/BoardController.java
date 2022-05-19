@@ -2,10 +2,13 @@ package com.example.realboard.controller;
 
 import com.example.realboard.Service.BoardService;
 import com.example.realboard.dto.BoardDTO;
+import com.example.realboard.dto.MemberDTO;
 import com.example.realboard.dto.PageRequestDTO;
+import com.example.realboard.security.AuthMemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +27,11 @@ public class BoardController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
-    public void register(){
+    public void register(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model){
+
+        log.info("MemberDTO auth : " + authMemberDTO);
+
+        model.addAttribute("dto",authMemberDTO);
 
     }
 
@@ -90,13 +97,19 @@ public class BoardController {
 
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/kidRegister")
-    public void kidRegister(Model model,int parentNum, int ref){
+    public void kidRegister(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,
+                            Model model,int parentNum, int ref){
 
+        log.info("Auth MemberDTO : " + authMemberDTO);
+
+        model.addAttribute("dto",authMemberDTO);
         model.addAttribute("parentNum",parentNum);
         model.addAttribute("ref",ref);
 
-        log.info(parentNum);
+        log.info("ParentNum : " + parentNum);
+        log.info("Ref : " + ref);
 
 
     }

@@ -32,4 +32,5 @@ public class AuthMemberDTO extends User {
         this.email = username;
 
     }
+
 }

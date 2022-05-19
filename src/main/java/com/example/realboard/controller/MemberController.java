@@ -51,9 +51,11 @@ public class MemberController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/my")
+    @GetMapping({"/my","/modify"})
     public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model){
                     //@Authentication으로 로그인된 계정의 DTO 가져옴
+
+        log.info("AuthMemberDTO : " + authMemberDTO);
 
         String email = authMemberDTO.getEmail();
 
@@ -69,6 +71,30 @@ public class MemberController {
 
 
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify")
+    public String modify(MemberDTO memberDTO){
+
+        log.info(memberDTO);
+
+        memberService.modify(memberDTO);
+
+        return "redirect:/member/my";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/remove")
+    public String remove(MemberDTO memberDTO){
+
+        log.info(memberDTO);
+
+        memberService.remove(memberDTO);
+
+        return "redirect:/logout";
+
+    }
+
 
 /*    @GetMapping("/login")
     public void login(){

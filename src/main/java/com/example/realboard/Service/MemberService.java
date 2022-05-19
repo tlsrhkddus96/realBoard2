@@ -10,6 +10,10 @@ public interface MemberService {
 
     MemberDTO getMember(String email);
 
+    void modify(MemberDTO memberDTO);
+
+    void remove(MemberDTO memberDTO);
+
 
 
     default Member dtoToEntity(MemberDTO memberDTO){

@@ -22,8 +22,12 @@
             </div>
 
             <div class="form-group">
-                <label>mid</label>
-                <input type="text" class="form-control" name="mid" >
+                <input type="hidden" class="form-control" name="mid"  th:value="${dto.mid}">
+            </div>
+
+            <div class="form-group">
+                <label>Writer</label>
+                <input type="text" class="form-control" name="nickname" th:value="${dto.nickname}" readonly>
             </div>
 
             <div class="form-group">

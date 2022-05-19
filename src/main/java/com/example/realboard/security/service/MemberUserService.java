@@ -49,7 +49,9 @@ public class MemberUserService implements UserDetailsService {
 
         log.info("AuthMemberDTO : " + authMemberDTO);
 
+        authMemberDTO.setMid(member.getMid());
         authMemberDTO.setEmail(member.getEmail());
+        authMemberDTO.setNickname(member.getNickname());
         //MemberRole은 스프링 시큐리티에서 사용하는 SimpleGranted...로 변환, "ROLE_" 이라는 접두어를 추가해서 사용
 
         return authMemberDTO;

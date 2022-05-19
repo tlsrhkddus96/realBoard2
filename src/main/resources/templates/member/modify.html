@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security" >
+
+<th:block th:replace="~{/layout/example :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">My Page</h1>
+
+        <form th:action="@{/member/modify}" th:method="post">
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" th:value="${dto.email}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>NickName</label>
+                <input type="text" class="form-control" name="nickname" th:value="${dto.nickname}">
+            </div>
+
+            <button type="button" class="btn btn-primary modifyBtn">Modify</button>
+            <button type="button" class="btn btn-info listBtn">Back</button>
+            <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
+        </form>
+
+
+
+
+  <!--          <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}">
+                <button type="button" class="btn btn-primary">Modify</button>
+            </a>
+
+            <a th:href="@{/board/kidRegister(parentNum=${dto.bno},ref=${dto.ref})}">
+                <button type="button" class="btn btn-primary">KidRegister</button>
+            </a>
+
+            <a th:href="@{/board/list(page=${requestDTO.page})}">
+                <button type="button" class="btn btn-info">List</button>
+            </a>
+        -->
+
+
+
+
+
+
+
+        <script>
+            $(document).ready(function (e) {
+
+
+            });
+        </script>
+
+        <script th:inline="javascript">
+
+            let actionForm = $("form"); //form객체
+
+            /*  Modify Button */
+            $(".modifyBtn").click(function (){
+
+                if(!confirm("수정하시겠습니까?")){
+                    return;
+                }
+
+                actionForm
+                    .attr("action","/member/modify")
+                    .attr("method","post")
+                    .submit();
+            });
+            /*  End Modify */
+
+            /*  Remove Button  */
+            $(".removeBtn").click(function (){
+
+                if(!confirm("삭제하시겠습니까?")){
+                    return;
+                }
+
+                actionForm
+                    .attr("action","/member/remove")
+                    .attr("method","post")
+                    .submit();
+            });
+            /*  End Remove  */
+
+            /*  List Button  */
+            $(".listBtn").click(function (){
+
+                /*let pageInfo = $("input[name='page']");
+
+                actionForm.empty(); //form 태그의 모든 내용 삭제
+                actionForm.append(pageInfo) //목록 페이지에 필요한 페이지정보*/
+
+                actionForm
+                    .attr("action","/member/my")
+                    .attr("method","get")
+                    .submit();
+
+            });
+            /*  End List  */
+
+        </script>
+
+
+
+    </th:block>
+
+
+</th:block>
+
+</html>
