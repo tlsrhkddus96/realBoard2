@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -18,6 +19,7 @@ public class ReplyTests {
 
     @Autowired
     private ReplyRepository replyRepository;
+
 
     @Test
     public void testInsert(){
@@ -57,6 +59,16 @@ public class ReplyTests {
             System.out.println(boardReply.getMember().getEmail());
 
         });
+
+    }
+
+    @Test
+    public void testReplyGGet(){
+
+        Board board = Board.builder().bno(189L).build();
+
+        List<Reply> result = replyRepository.findByBoard(board);
+
 
     }
 

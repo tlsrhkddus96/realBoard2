@@ -59,13 +59,17 @@ public class BoardController {
     }
 
     @GetMapping({"/read","/modify"})
-    public void read(Long bno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
+    public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,
+            Long bno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
+
+        log.info("AuthMemberDTO : " + authMemberDTO);
 
         log.info("Bno : " + bno);
 
         BoardDTO boardDTO = boardService.getBoard(bno);
 
         model.addAttribute("dto",boardDTO);
+        model.addAttribute("authDTO",authMemberDTO);
 
     }
 

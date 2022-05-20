@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 <th:block th:replace="~{/layout/example :: setContent(~{this::content} )}">
 
     <th:block th:fragment="content">
@@ -47,6 +47,8 @@
                 <button type="button" class="btn btn-info">List</button>
             </a>
 
+            <hr class="dropdown-divider" />
+
             <button type="button" class="btn btn-primary">
                 Reply Count <span class="badge badge-light">[[${dto.replyCnt}]]</span>
             </button>
@@ -57,6 +59,7 @@
             <div class="list-group replyList">
 
             </div>
+
 
 
             <!-- Reply Modal -->
@@ -71,18 +74,23 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Replyer ID</label>
-                                <input type="text" class="form-control" name="mid">
+                                <label>Replyer</label>
+                                <input type="text" class="form-control" name="nickname" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label>Reply Text</label>
                                 <input type="text" class="form-control" name="text">
                             </div>
+
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="mid" readonly>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary closeBtn" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary replySaveBtn">Save Changes</button>
+                            <button type="button" class="btn btn-primary replySaveBtn">Add Reply</button>
                             <button type="button" class="btn btn-warning modifyBtn">Modify</button>
                             <button type="button" class="btn btn-danger removeBtn">Remove</button>
                         </div>
@@ -153,6 +161,7 @@
                 let replyModal = $(".replyModal");
                 let inputMid = $('input[name="mid"]');
                 let inputText = $('input[name="text"]');
+                let inputNickname = $('input[name="nickname"]');
                 let replyNum;
 
                 $(".closeBtn").click(function (){
@@ -165,7 +174,14 @@
                 /* add Reply */
                 $(".addReplyBtn").click(function (){
 
-                    inputMid.val('');
+                    if('[[${auth?.mid}]]'== null){
+                        alert("로그인 하셔야합니다.");
+                        return;
+
+                    }
+
+                    inputMid.val('[[${authDTO?.mid}]]');
+                    inputNickname.val('[[${authDTO?.nickname}]]');
                     inputText.val('');
 
                     $('.removeBtn , .modifyBtn ').hide();
@@ -227,7 +243,7 @@
 
                             console.log(reply);
 
-                            str += '<div class="card-body" data-replyNum='+reply.replyNum+' data-mid='+reply.mid+'>';
+                            str += '<div class="card-body" data-nickname='+reply.nickname+' data-replyNum='+reply.replyNum+' data-mid='+reply.mid+'>';
                             str += '<h5 class="card-title">'+reply.text+'</h5>';
                             str += '<h6 class="card-subtitle mb-2 text-muted">'+reply.nickname+'</h6>';
                             str += '<p class="card-text">'+formatTime(reply.regDate)+'</p>';
@@ -251,8 +267,16 @@
                     replyNum = targetReply.data("replynum");
 
                     console.log("replyNum : " + replyNum);
+
                     inputMid.val(targetReply.data("mid"));
                     inputText.val(targetReply.find('.card-title').clone().children().remove().end().text());
+                    inputNickname.val(targetReply.data("nickname"));
+
+                    if(inputMid.val()!=='[[${authDTO?.mid}]]'){
+
+                        $(".removeBtn , .modifyBtn").hide();
+
+                    }
 
                     $('.replyModal').modal('show');
 
