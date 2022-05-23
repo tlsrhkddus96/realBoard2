@@ -35,7 +35,8 @@
                 </ul>
             </div>
 
-            <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}" sec:authorize="isAuthenticated()">
+            <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}"
+                th:if="${dto?.nickname}==${authDTO?.nickname}">
                 <button type="button" class="btn btn-primary">Modify</button>
             </a>
 
@@ -154,6 +155,11 @@
 
         <script>
             $(document).ready(function (e){
+
+                let authEmail = '[[${authDTO?.email}]]';
+
+
+                console.log(authEmail);
 
                 let bno = [[${dto.bno}]];
 
