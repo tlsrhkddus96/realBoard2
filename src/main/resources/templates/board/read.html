@@ -35,11 +35,11 @@
                 </ul>
             </div>
 
-            <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}">
+            <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}" sec:authorize="isAuthenticated()">
                 <button type="button" class="btn btn-primary">Modify</button>
             </a>
 
-            <a th:href="@{/board/kidRegister(parentNum=${dto.bno},ref=${dto.ref})}">
+            <a th:href="@{/board/kidRegister(parentNum=${dto.bno},ref=${dto.ref})}" sec:authorize="isAuthenticated()">
                 <button type="button" class="btn btn-primary">KidRegister</button>
             </a>
 
@@ -52,7 +52,7 @@
             <button type="button" class="btn btn-primary">
                 Reply Count <span class="badge badge-light">[[${dto.replyCnt}]]</span>
             </button>
-            <button type="button" class="btn btn-info addReplyBtn">
+            <button type="button" class="btn btn-info addReplyBtn" sec:authorize="isAuthenticated()">
                 Reply Register
             </button>
 
@@ -174,11 +174,6 @@
                 /* add Reply */
                 $(".addReplyBtn").click(function (){
 
-                    if('[[${auth?.mid}]]'== null){
-                        alert("로그인 하셔야합니다.");
-                        return;
-
-                    }
 
                     inputMid.val('[[${authDTO?.mid}]]');
                     inputNickname.val('[[${authDTO?.nickname}]]');
