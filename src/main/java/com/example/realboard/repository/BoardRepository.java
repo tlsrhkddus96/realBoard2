@@ -2,6 +2,7 @@ package com.example.realboard.repository;
 
 import com.example.realboard.entity.Board;
 import com.example.realboard.entity.Member;
+import com.example.realboard.repository.search.SearchBoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board,Long> {
+public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoardRepository {
 
     //ref 테스트 ++ parentNum 추가
     @Transactional
@@ -42,6 +43,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
              countQuery = "select count (b) from Board b")
     Page<Object[]> getBoardWithReplyCount(Pageable pageable);
 
+    //Test
     // 목록화면에 필요한 데이터 Page<>로 받기
     // Board, BoardImage, Member, count(reply)
     @Query("select b,bi,m,count (r) " +

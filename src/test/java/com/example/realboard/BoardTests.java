@@ -182,5 +182,14 @@ public class BoardTests {
     }
 
 
+    @Test
+    public void testSearch1(){
+
+        boardRepository.search1();
+
+    }
+
+
+
 
 }
