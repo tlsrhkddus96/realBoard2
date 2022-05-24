@@ -43,8 +43,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
              countQuery = "select count (b) from Board b")
     Page<Object[]> getBoardWithReplyCount(Pageable pageable);
 
-    //Test
-    // 목록화면에 필요한 데이터 Page<>로 받기
+    // 목록화면에 이미지가 필요할 때
     // Board, BoardImage, Member, count(reply)
     @Query("select b,bi,m,count (r) " +
             "from Board b " +

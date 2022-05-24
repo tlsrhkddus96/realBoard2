@@ -182,10 +182,17 @@ public class BoardTests {
     }
 
 
+    @Transactional
     @Test
     public void testSearch1(){
 
-        boardRepository.search1();
+        Pageable pageable =
+                PageRequest.of(0,10,Sort.by("ref").descending()
+                        .and(Sort.by("refOrder").ascending()).
+                        and(Sort.by("title").ascending()));
+
+        Page<Object[]> result = boardRepository.searchPage("t","1",pageable);
+
 
     }
 
