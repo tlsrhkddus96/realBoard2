@@ -106,8 +106,7 @@
                         <p>Modal body text goes here</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary closeBtn" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -117,12 +116,7 @@
 
         <script th:inline="javascript">
 
-            let msg = [[${msg}]];
-            console.log(msg);
 
-            if(msg){
-                $(".modal").modal("show");
-            }
 
             let searchForm = $("#searchForm");
             $('.btn-search').click(function(e){
@@ -134,6 +128,37 @@
                 searchForm.empty().submit();
 
             });
+
+            $(".closeBtn").click(function (){
+
+                $(".modal").modal("hide");
+
+            })
+
+        </script>
+
+        <script>
+
+            $(document).ready(function (e){
+
+                let msg = [[${msg}]];
+
+                let email = [[${email}]];
+
+                let modal = $(".modal");
+
+
+                if(msg){
+                    $(".modal-body").html("게시글 "+msg+" 번이 등록되었습니다.");
+                    modal.modal("show");
+                }
+
+                if(email){
+                    $(".modal-body").html("[ "+email+" ] 회원가입이 완료되었습니다." );
+                    modal.modal("show");
+                }
+
+            })
 
         </script>
 
