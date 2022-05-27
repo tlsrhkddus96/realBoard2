@@ -25,6 +25,9 @@ public class Member extends BaseEntity{
 
     private String nickname;
 
+    @Column(columnDefinition = "integer default 0")
+    private int likePoint;
+
     @Builder.Default
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<MemberRole> roleSet = new HashSet<>();

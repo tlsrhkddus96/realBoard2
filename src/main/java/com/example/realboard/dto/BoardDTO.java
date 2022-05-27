@@ -26,6 +26,8 @@ public class BoardDTO {
 
     private LocalDateTime regDate, modDate;
 
+    private int likeHit;    // 게시물 추천수
+
     //페이징에 필요한 Member의 nickname, count(Reply) int
     private int replyCnt;
     private String nickname;

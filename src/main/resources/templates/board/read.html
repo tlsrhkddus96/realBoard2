@@ -35,13 +35,33 @@
                 </ul>
             </div>
 
+            <p>
+
+            </p>
+
+            <div class="like" style="align-content: center">
+                <button type="button" class="btn btn-warning likeBtn" style="margin-left: 500px"
+                        sec:authorize="isAuthenticated()">
+                    추천 [[${dto.likeHit}]]
+                </button>
+                <button type="button" class="btn btn-warning likeBtnX" style="margin-left: 500px"
+                        sec:authorize="isAnonymous()">
+                    추천 [[${dto.likeHit}]]ddd
+                </button>
+            </div>
+
+            <p>
+
+            </p>
+
+
             <a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}"
                 th:if="${dto?.nickname}==${authDTO?.nickname}">
                 <button type="button" class="btn btn-primary">Modify</button>
             </a>
 
             <a th:href="@{/board/kidRegister(parentNum=${dto.bno},ref=${dto.ref})}" sec:authorize="isAuthenticated()">
-                <button type="button" class="btn btn-primary">KidRegister</button>
+                <button type="button" class="btn btn-primary" >KidRegister</button>
             </a>
 
             <a th:href="@{/board/list(page=${requestDTO.page})}">
@@ -351,6 +371,38 @@
 
                 })
                 /* End Click Picture */
+
+
+                /*------------------  Recommend  ------------------*/
+
+
+                $(".likeBtnX").on("click",function (e){
+
+                    alert("로그인 하셔야 추천이 가능합니다.");
+                    return false;
+
+                });
+
+                $(".likeBtn").on("click",function (e){
+
+                    let data = {bno:bno, mid:[[${authDTO?.mid}]]}
+
+                    $.ajax({
+
+                        url:'/like/updateLike',
+                        type:'POST',
+                        data: JSON.stringify(data),
+                        contentType : 'application/json; charset=utf-8',
+                        dataType : "text",
+                        success : function (result){
+                            console.log("result : " + result);
+                            self.location.reload();
+                        }
+                    });
+
+                });
+
+
 
 
             }); //document Ready

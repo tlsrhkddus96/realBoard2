@@ -22,19 +22,25 @@ public class Board extends BaseEntity{
 
     private String content;
 
-    private int ref;
+    private int ref;        //게시물 그룹
+
+    @Column(columnDefinition = "integer default 0")
+    private int likeHit;    //추천수
 
     @Column(columnDefinition = "integer default 0")
     private int step;
 
     @Column(columnDefinition = "integer default 0")
-    private int refOrder;
+    private int refOrder;   //그룹 내 순서
 
     @Column(columnDefinition = "integer default 0")
     private int parentNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+
+
 
     public void changeTitle(String title){
         this.title = title;

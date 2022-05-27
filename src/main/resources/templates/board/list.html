@@ -45,6 +45,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Recommend</th>
                 <th scope="col">Writer</th>
                 <th scope="col">RegDate</th>
                 <th scope="col">ModDate</th>
@@ -59,6 +60,7 @@
                     </a>
                 </th>
                 <td>[[${dto.title}]]  ----<b>[ [[${dto.replyCnt}]] ]</b></td>
+                <td><b style="color: red">[[${dto.likeHit}]]</b></td>
                 <td>[[${dto.nickname}]]</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
@@ -141,9 +143,9 @@
 
             $(document).ready(function (e){
 
-                let msg = [[${msg}]];
+                let msg = '[[${msg}]]';
 
-                let email = [[${email}]];
+                let email = '[[${email}]]';
 
                 let modal = $(".modal");
 

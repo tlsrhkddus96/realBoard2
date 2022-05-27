@@ -16,6 +16,8 @@ public class MemberDTO {
 
     private String password;
 
+    private int likePoint;
+
 
 
 }
