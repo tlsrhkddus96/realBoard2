@@ -36,14 +36,14 @@ public interface BoardLikeRepository extends JpaRepository<BoardLike,Long> {
     @Query("update BoardLike l set l.likeCheck = 1 where l.board.bno=:bno and l.member.mid=:mid")
     void updateLikeCheck(Long bno, Long mid);
 
-    //게시글 추천버튼 다시 누를 시 likeCheck 0으로 변경
+    /*//게시글 추천버튼 다시 누를 시 likeCheck 0으로 변경
     @Modifying
     @Query("update BoardLike l set l.likeCheck = 0 where l.board.bno=:bno and l.member.mid=:mid")
-    void updateLikeCheckCancel(Long bno, Long mid);
+    void updateLikeCheckCancel(Long bno, Long mid);*/
 
     //likeCheck를 select해서 중복방지
-    @Query("select l from BoardLike l where l.board.bno=:bno and l.member.mid=:mid ")
-    Integer boardLikeCheck(Long bno, Long mid);
+    @Query("select count(l) from BoardLike l where l.board.bno=:bno and l.member.mid=:mid")
+    Integer likeCheck(Long bno, Long mid);
 
 
 

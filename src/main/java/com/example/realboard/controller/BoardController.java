@@ -92,10 +92,16 @@ public class BoardController {
 
         log.info("boardDTO : " + boardDTO);
 
-        boardService.modifyBoardTest(boardDTO);
+        boardService.modifyBoard(boardDTO);
 
         redirectAttributes.addAttribute("page",requestDTO.getPage());
         redirectAttributes.addAttribute("bno",boardDTO.getBno());
+        
+        
+        /*
+        *   Modify시 ref reforder step 등등 다 초기화됨 kidRegister참고해서 고쳐라sibal
+        * 
+        * */
 
         return "redirect:/board/read";
 

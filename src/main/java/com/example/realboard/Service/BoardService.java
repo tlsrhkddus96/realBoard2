@@ -23,10 +23,7 @@ public interface BoardService {
     BoardDTO getBoard(Long bno);
 
     void removeBoard(Long bno);
-
     void modifyBoard(BoardDTO boardDTO);
-
-    void modifyBoardTest(BoardDTO boardDTO);
 
     Long kidRegister(BoardDTO boardDTO);
 
@@ -76,6 +73,10 @@ public interface BoardService {
                 .bno(boardDTO.getBno())
                 .title(boardDTO.getTitle())
                 .content(boardDTO.getContent())
+                .likeHit(boardDTO.getLikeHit())
+                .step(boardDTO.getStep())
+                .ref(boardDTO.getRef())
+                .refOrder(boardDTO.getRefOrder())
                 .member(member)
                 .build();
 
@@ -114,6 +115,7 @@ public interface BoardService {
                 .bno(board.getBno())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .likeHit(board.getLikeHit())
                 .ref(board.getRef())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())

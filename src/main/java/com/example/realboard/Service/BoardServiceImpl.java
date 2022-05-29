@@ -145,23 +145,6 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void modifyBoard(BoardDTO boardDTO) {
 
-      //Board board = Board.builder().bno(boardDTO.getBno()).build();
-
-        Long bno = boardDTO.getBno();
-
-        Board board = boardRepository.findBoardByBno(bno);
-
-        board.changeTitle(boardDTO.getTitle());
-        board.changeContent(boardDTO.getContent());
-
-        boardRepository.save(board);
-
-    }
-
-    @Transactional
-    @Override
-    public void modifyBoardTest(BoardDTO boardDTO) {
-
         log.info(boardDTO);
 
         Map<String,Object> entityMap = dtoToEntity(boardDTO);

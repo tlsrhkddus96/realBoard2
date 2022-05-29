@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class BoardLikeServiceImpl implements BoardLikeService{
     @Override
     public int likeCheck(Long bno, Long mid) {
 
-        int result = likeRepository.boardLikeCheck(bno,mid);
+        int result = likeRepository.likeCheck(bno,mid);
 
         return result;
     }
@@ -35,7 +37,47 @@ public class BoardLikeServiceImpl implements BoardLikeService{
 
     }
 
+    @Transactional
+    @Override
+    public void updateLike(Long bno) {
 
+        log.info("UpdateLike " + bno);
+
+        likeRepository.updateLike(bno);
+
+    }
+
+    @Transactional
+    @Override
+    public void updateLikeCancel(Long bno) {
+
+        log.info("UpdateLikeCancel " + bno);
+
+        likeRepository.updateLikeCancel(bno);
+
+    }
+
+    @Transactional
+    @Override
+    public void updateLikeCheck(Long bno, Long mid) {
+
+        log.info("UpdateLike Check / bno : " + bno + " / mid : "+ mid);
+
+        likeRepository.updateLikeCheck(bno,mid);
+
+    }
+
+
+
+    @Transactional
+    @Override
+    public void deleteBoardLike(Long bno, Long mid) {
+
+        log.info("delete BoardLike Table");
+
+        likeRepository.deleteBoardLike(bno,mid);
+
+    }
 
 
 }

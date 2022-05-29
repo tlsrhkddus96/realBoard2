@@ -40,13 +40,11 @@
             </p>
 
             <div class="like" style="align-content: center">
-                <button type="button" class="btn btn-warning likeBtn" style="margin-left: 500px"
-                        sec:authorize="isAuthenticated()">
-                    추천 [[${dto.likeHit}]]
+                <button type="button" class="btn btn-danger likeBtn" sec:authorize="isAuthenticated()">
+                    Recommend [[${dto.likeHit}]]
                 </button>
-                <button type="button" class="btn btn-warning likeBtnX" style="margin-left: 500px"
-                        sec:authorize="isAnonymous()">
-                    추천 [[${dto.likeHit}]]ddd
+                <button type="button" class="btn btn-danger likeBtnX" sec:authorize="isAnonymous()">
+                    Recommend [[${dto.likeHit}]]
                 </button>
             </div>
 
@@ -385,7 +383,7 @@
 
                 $(".likeBtn").on("click",function (e){
 
-                    let data = {bno:bno, mid:[[${authDTO?.mid}]]}
+                    let data = {bno:bno, mid:'[[${authDTO?.mid}]]'}
 
                     $.ajax({
 
@@ -394,8 +392,15 @@
                         data: JSON.stringify(data),
                         contentType : 'application/json; charset=utf-8',
                         dataType : "text",
-                        success : function (result){
-                            console.log("result : " + result);
+                        success : function (likeCheck){
+                            console.log("likeCheck : " + likeCheck);
+
+                            if(likeCheck==0){
+                                alert("추천완료");
+                            }else if(likeCheck==1){
+                                alert("추천취소");
+                            }
+
                             self.location.reload();
                         }
                     });

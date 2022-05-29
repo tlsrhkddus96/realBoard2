@@ -11,6 +11,16 @@ public interface BoardLikeService {
 
     void insertBoardLike(BoardLikeDTO boardLikeDTO);
 
+    void updateLike(Long bno);
+
+    void updateLikeCancel(Long bno);
+
+    void updateLikeCheck(Long bno, Long mid);
+
+    void deleteBoardLike(Long bno, Long mid);
+
+
+
 
     default BoardLikeDTO entityToDTO(BoardLike boardLike){
 
