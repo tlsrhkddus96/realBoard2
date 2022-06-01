@@ -80,7 +80,7 @@ public class BoardController {
 
         boardService.removeBoard(bno);
 
-        redirectAttributes.addFlashAttribute("msg",bno);
+        redirectAttributes.addFlashAttribute("removedBno",bno);
 
         return "redirect:/board/list";
 
@@ -90,18 +90,12 @@ public class BoardController {
     public String modify(BoardDTO boardDTO, @ModelAttribute("requestDTO")PageRequestDTO requestDTO,
                          RedirectAttributes redirectAttributes){
 
-        log.info("boardDTO : " + boardDTO);
+        log.info("Controller Modify ] boardDTO : " + boardDTO);
 
         boardService.modifyBoard(boardDTO);
 
         redirectAttributes.addAttribute("page",requestDTO.getPage());
         redirectAttributes.addAttribute("bno",boardDTO.getBno());
-        
-        
-        /*
-        *   Modify시 ref reforder step 등등 다 초기화됨 kidRegister참고해서 고쳐라sibal
-        * 
-        * */
 
 
         return "redirect:/board/read";

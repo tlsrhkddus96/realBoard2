@@ -7,6 +7,7 @@ import com.example.realboard.entity.Board;
 import com.example.realboard.entity.BoardImage;
 import com.example.realboard.entity.Member;
 import com.example.realboard.repository.BoardImageRepository;
+import com.example.realboard.repository.BoardLikeRepository;
 import com.example.realboard.repository.BoardRepository;
 import com.example.realboard.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ public class BoardServiceImpl implements BoardService{
     private final BoardImageRepository imageRepository;
 
     private final ReplyRepository replyRepository;
+
+    private final BoardLikeRepository likeRepository;
 
     @Transactional
     @Override
@@ -104,10 +107,10 @@ public class BoardServiceImpl implements BoardService{
         Member member = (Member) result.get(0)[2];
         Long replyCnt = (Long) result.get(0)[3];
 
-        log.info("board " + board);
-        log.info("member " + member);
-        log.info("replyCnt " + replyCnt);
-        log.info("result[1]" + result.get(0)[1]);
+        log.info("Get board " + board);
+        log.info("Get member " + member);
+        log.info("Get replyCnt " + replyCnt);
+        log.info("Get result[1]" + result.get(0)[1]);
 
         if(result.get(0)[1]!=null) { //해당 게시물에 이미지가 있을 경우
             
@@ -137,6 +140,7 @@ public class BoardServiceImpl implements BoardService{
 
         replyRepository.deleteByBoard(board);   //해당 board의 reply삭제
         imageRepository.deleteByBoard(board);   //해당 board의 image삭제
+        likeRepository.deleteByBno(bno);        //넘어온 bno 값이 있는 like테이블 삭제
         boardRepository.deleteById(bno);        //해당 bno 테이블 삭제
 
     }
@@ -145,7 +149,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void modifyBoard(BoardDTO boardDTO) {
 
-        log.info(boardDTO);
+        log.info("Modify BoardDTO : " + boardDTO);
 
         Map<String,Object> entityMap = dtoToEntity(boardDTO);
 
@@ -155,7 +159,7 @@ public class BoardServiceImpl implements BoardService{
         board.changeContent(boardDTO.getContent());
 
         boardRepository.save(board);
-        boardRepository.updateRef(board.getBno());
+        //boardRepository.updateRef(board.getBno());
 
         List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
 

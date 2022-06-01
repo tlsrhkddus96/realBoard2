@@ -95,7 +95,14 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
     @Query("update Board b set b.refOrder = b.refOrder +1 where b.ref= :ref and b.refOrder > :refOrder")
     void updateRefOrder(int ref, int refOrder);
 
+    /*
+    * 회원 삭제 >> 해당 회원이 추천한 게시물들 다시 likeHit -1
 
+    1) 회원삭제 클릭
+    2) 해당 회원의 mid값이 있는 bno 추출
+    3) 2번의 결과값bno를 가지고 likeHit -1
+
+    * */
 
 
 

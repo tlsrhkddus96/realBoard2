@@ -145,10 +145,16 @@
 
                 let msg = '[[${msg}]]';
 
+                let removedBno = '[[${removedBno}]]';
+
                 let email = '[[${email}]]';
 
                 let modal = $(".modal");
 
+                if(removedBno){
+                    $(".modal-body").html("게시글 "+removedBno+" 번이 삭제되었습니다.");
+                    modal.modal("show");
+                }
 
                 if(msg){
                     $(".modal-body").html("게시글 "+msg+" 번이 등록되었습니다.");

@@ -23,6 +23,7 @@ public interface BoardService {
     BoardDTO getBoard(Long bno);
 
     void removeBoard(Long bno);
+
     void modifyBoard(BoardDTO boardDTO);
 
     Long kidRegister(BoardDTO boardDTO);
@@ -37,10 +38,15 @@ public interface BoardService {
                 .content(board.getContent())
                 .likeHit(board.getLikeHit())
                 .ref(board.getRef())
+                .parentNum(board.getParentNum())
+                .refOrder(board.getRefOrder())
+                .step(board.getStep())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
+                //
                 .mid(member.getMid())
                 .nickname(member.getNickname())
+                //
                 .replyCnt(replyCnt.intValue())
                 .build();
 
@@ -77,6 +83,7 @@ public interface BoardService {
                 .step(boardDTO.getStep())
                 .ref(boardDTO.getRef())
                 .refOrder(boardDTO.getRefOrder())
+                .parentNum(boardDTO.getParentNum())
                 .member(member)
                 .build();
 
@@ -116,11 +123,16 @@ public interface BoardService {
                 .title(board.getTitle())
                 .content(board.getContent())
                 .likeHit(board.getLikeHit())
+                .parentNum(board.getParentNum())
                 .ref(board.getRef())
+                .refOrder(board.getRefOrder())
+                .step(board.getStep())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
+                //
                 .mid(member.getMid())
                 .nickname(member.getNickname())
+                //
                 .replyCnt(replyCnt.intValue())
                 .build();
 

@@ -45,6 +45,11 @@ public interface BoardLikeRepository extends JpaRepository<BoardLike,Long> {
     @Query("select count(l) from BoardLike l where l.board.bno=:bno and l.member.mid=:mid")
     Integer likeCheck(Long bno, Long mid);
 
+    //게시물 삭제시 해당bno BoardLike 삭제
+    @Modifying
+    @Query("delete from BoardLike l where l.board.bno=:bno")
+    void deleteByBno(Long bno);
+
 
 
 
