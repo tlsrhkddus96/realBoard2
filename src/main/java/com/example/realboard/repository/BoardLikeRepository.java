@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface BoardLikeRepository extends JpaRepository<BoardLike,Long> {
 
 
@@ -49,6 +51,16 @@ public interface BoardLikeRepository extends JpaRepository<BoardLike,Long> {
     @Modifying
     @Query("delete from BoardLike l where l.board.bno=:bno")
     void deleteByBno(Long bno);
+
+    //멤버 삭제시 해당mid BoardLike 삭제
+    @Modifying
+    @Query("delete from BoardLike l where l.member.mid=:mid")
+    void deleteByMid(Long mid);
+
+
+    //멤버 삭제시 해당mid를 가진 bno 구하기 (나중에 bno의 likeHit-1)
+    @Query("select l.board.bno from BoardLike l where l.member.mid =:mid")
+    List<Long> findBnoByMid(Long mid);
 
 
 

@@ -3,11 +3,8 @@ package com.example.realboard.Service;
 import com.example.realboard.entity.Board;
 import com.example.realboard.entity.Member;
 import com.example.realboard.entity.MemberRole;
-import com.example.realboard.repository.BoardImageRepository;
-import com.example.realboard.repository.BoardRepository;
-import com.example.realboard.repository.MemberRepository;
+import com.example.realboard.repository.*;
 import com.example.realboard.dto.MemberDTO;
-import com.example.realboard.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +28,8 @@ public class MemberServiceImpl implements MemberService{
     private final ReplyRepository replyRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final BoardLikeRepository likeRepository;
 
 
     @Override
@@ -93,18 +92,25 @@ public class MemberServiceImpl implements MemberService{
         Optional<Member> result = memberRepository.findByEmail(email);
 
         Member member = result.get();
+        Long mid = result.get().getMid();
 
-        replyRepository.deleteByMember(member); // 1. 해당멤버가 작성한 댓글제거
+        List<Long> likeBno = likeRepository.findBnoByMid(mid);  //삭제하려는 멤버가 추천한 게시글 id 추출
+        likeBno.forEach(bno -> {
+            likeRepository.updateLikeCancel(bno);   // 멤버가 추천한 게시글 likeHit -1
+        });
+        likeRepository.deleteByMid(mid);    // 삭제하려는 mid를 가진 BoardLike 테이블 삭제
 
-        List<Board> boardResult = boardRepository.findBoardByMember(member);    // 2. 해당멤버가 작성한 게시글 검색
+        replyRepository.deleteByMember(member); // 4. 해당멤버가 작성한 댓글제거
+
+        List<Board> boardResult = boardRepository.findBoardByMember(member);    // 5. 해당멤버가 작성한 게시글 검색
         boardResult.forEach(board -> {
-            imageRepository.deleteByBoard(board);   // 3. 그 게시글의 이미지 삭제
-            replyRepository.deleteByBoard(board);   // 4. 그 게시글의 댓글 또한 삭제
+            imageRepository.deleteByBoard(board);   // 6. 그 게시글의 이미지 삭제
+            replyRepository.deleteByBoard(board);   // 7. 그 게시글의 댓글 또한 삭제
         });
 
-        boardRepository.deleteByMember(member);     // 5. 게시글 삭제
+        boardRepository.deleteByMember(member);     // 8. 게시글 삭제
 
-        memberRepository.deleteById(member.getMid());   // 6. 멤버 삭제
+        memberRepository.deleteById(member.getMid());   // 9. 멤버 삭제
 
 
 

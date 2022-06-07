@@ -98,7 +98,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
     /*
     * 회원 삭제 >> 해당 회원이 추천한 게시물들 다시 likeHit -1
 
-    1) 회원삭제 클릭
+    1) 회원삭제 클릭 >> 해당 계정이 가지고있는 bno추출 from BoardLike 에서
     2) 해당 회원의 mid값이 있는 bno 추출
     3) 2번의 결과값bno를 가지고 likeHit -1
 
