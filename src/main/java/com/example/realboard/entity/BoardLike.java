@@ -28,4 +28,5 @@ public class BoardLike extends BaseEntity{
 
 
 
+
 }
