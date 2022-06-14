@@ -63,7 +63,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
     List<Object[]> getBoardWithAll(Long bno);*/
 
 
-    //조회화면에 필요한 Board, Image, Member 92p>reply추가시
+    //조회화면에 필요한 Board, Image, Member , reply(count)
     @Query("select b,bi,m, count(r) " +
             "from Board b " +
             "left join BoardImage bi on bi.board = b " +

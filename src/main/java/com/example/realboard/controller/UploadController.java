@@ -39,7 +39,7 @@ public class UploadController {
 
     private final UploadService uploadService;
 
-    //upload결과를 반환하기위해 ResponseEntity<> 사용
+
     @PostMapping("/uploadAjax")
     public ResponseEntity<List<UploadResultDTO>> uploadFile(MultipartFile[] uploadFiles){
 

@@ -40,7 +40,6 @@ public class BoardServiceImpl implements BoardService{
 
         log.info(boardDTO);
 
-
         Map<String,Object> entityMap = dtoToEntity(boardDTO);
 
         Board board = (Board) entityMap.get("board");
@@ -54,10 +53,6 @@ public class BoardServiceImpl implements BoardService{
                 imageRepository.save(boardImage);
             });
         }
-
-/*        boardImageList.forEach(boardImage -> {
-            imageRepository.save(boardImage);
-        });*/
 
         return board.getBno();
     }
@@ -86,6 +81,7 @@ public class BoardServiceImpl implements BoardService{
                 (Long) en[2]
         ));
 
+        // 목록에 이미지가 필요할 때
        /* Function<Object[], BoardDTO> fn = (arr -> entitiesToDTO(
                 (Board) arr[0],
                 (List<BoardImage>)(Arrays.asList((BoardImage)arr[1])),
@@ -106,11 +102,6 @@ public class BoardServiceImpl implements BoardService{
         Board board = (Board) result.get(0)[0];
         Member member = (Member) result.get(0)[2];
         Long replyCnt = (Long) result.get(0)[3];
-
-        log.info("Get board " + board);
-        log.info("Get member " + member);
-        log.info("Get replyCnt " + replyCnt);
-        log.info("Get result[1]" + result.get(0)[1]);
 
         if(result.get(0)[1]!=null) { //해당 게시물에 이미지가 있을 경우
             
@@ -159,7 +150,6 @@ public class BoardServiceImpl implements BoardService{
         board.changeContent(boardDTO.getContent());
 
         boardRepository.save(board);
-        //boardRepository.updateRef(board.getBno());
 
         List<BoardImage> boardImageList = (List<BoardImage>) entityMap.get("imgList");
 

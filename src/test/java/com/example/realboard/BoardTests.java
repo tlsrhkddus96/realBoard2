@@ -119,7 +119,7 @@ public class BoardTests {
 
         Pageable pageable = PageRequest.of(0,10, Sort.by("ref").descending().and(Sort.by("refOrder").ascending()));
 
-        Page<Object[]> result = boardRepository.getListPage(pageable);
+        Page<Object[]> result = boardRepository.getBoardWithReplyCount(pageable);
 
         result.get().forEach(row -> {
             Object[] arr = (Object[]) row;
