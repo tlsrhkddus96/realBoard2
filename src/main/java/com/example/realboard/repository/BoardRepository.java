@@ -72,6 +72,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
             "where b.bno = :bno group by bi" )
     List<Object[]> getBoardWithAll(Long bno);
 
+
     //member객체를 사용하는 게시물 삭제
     @Modifying
     @Query("delete from Board b where b.member = :member")
