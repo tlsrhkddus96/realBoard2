@@ -28,7 +28,6 @@ public class BoardLikeController {
         Long bno = boardLikeDTO.getBno();
         Long mid = boardLikeDTO.getMid();
 
-
         int likeCheck = boardLikeService.likeCheck(bno,mid);
 
         log.info("BoardLikeController like check : " +likeCheck);

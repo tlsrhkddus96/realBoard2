@@ -129,19 +129,16 @@ public class UploadController {
     public ResponseEntity<Boolean> removeFile(String fileName){
 
         log.info("fileName : " + fileName);
-
         String srcFileName = null;
 
         try{
             srcFileName = URLDecoder.decode(fileName,"UTF-8");
-
             log.info("srcFileName : " + srcFileName);
 
             File file = new File(uploadPath + File.separator + srcFileName);
             boolean result = file.delete();
 
             File thumbnail = new File(file.getParent(),"s_" + file.getName());
-
             result = thumbnail.delete();
 
             return new ResponseEntity<>(result, HttpStatus.OK);

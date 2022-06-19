@@ -24,18 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
-        http.authorizeRequests()
-                .antMatchers("/dd").authenticated();
-
         http.formLogin()
-                .successForwardUrl("/board/list")
                 .defaultSuccessUrl("/board/list"); // 인가/인증 문제시 로그인화면으로
-
 
         http.csrf().disable();
         http.logout().logoutSuccessUrl("/board/list");
-
-
 
     }
 

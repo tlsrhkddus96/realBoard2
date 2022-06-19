@@ -150,10 +150,6 @@ public interface BoardService {
                 .bno(boardDTO.getBno())
                 .title("["+parentBoard.getBno()+"]번의 답글 : "+boardDTO.getTitle())
                 .content(boardDTO.getContent())
-
-/*                .parentNum(boardDTO.getParentNum()) //해당 게시물의 bno == parentNum
-                .ref(parentBoard.getRef())*/
-
                 .parentNum(parentBoard.getBno().intValue())
                 .ref(parentBoard.getRef())
                 .refOrder(parentBoard.getRefOrder()+1)

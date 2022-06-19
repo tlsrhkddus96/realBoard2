@@ -39,4 +39,17 @@ public class BoardLikeTests {
     }
 
 
+    @Test
+    public void testLikeCheck(){
+
+        Long bno = 10L;
+        Long mid = 11L;
+
+        System.out.println(likeRepository.likeCheck(bno,mid));
+
+
+
+    }
+
+
 }

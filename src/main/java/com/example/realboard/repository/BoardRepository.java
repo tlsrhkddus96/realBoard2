@@ -92,9 +92,11 @@ public interface BoardRepository extends JpaRepository<Board,Long> , SearchBoard
     Integer findMaxRefOrder(int ref);*/
 
 
-    //답글 작성시 원글의 ref, reforder를 가져와 해당 refOrder보다 높은 값을 +1 해주고 작성한 답글은 원글의 refOrder+1
+    //답글 작성시 원글의 ref, reforder를 가져와 해당 refOrder보다
+    // 높은 값을 +1 해주고 작성한 답글은 원글의 refOrder+1
     @Modifying
-    @Query("update Board b set b.refOrder = b.refOrder +1 where b.ref= :ref and b.refOrder > :refOrder")
+    @Query("update Board b set b.refOrder = b.refOrder +1" +
+            " where b.ref= :ref and b.refOrder > :refOrder")
     void updateRefOrder(int ref, int refOrder);
 
     /*
