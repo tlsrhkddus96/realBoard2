@@ -148,9 +148,9 @@ public interface BoardService {
 
         Board board = Board.builder()
                 .bno(boardDTO.getBno())
-                .title("["+parentBoard.getBno()+"]번의 답글 : "+boardDTO.getTitle())
+                .title("["+boardDTO.getParentNum()+"]번의 답글 : "+boardDTO.getTitle())
                 .content(boardDTO.getContent())
-                .parentNum(parentBoard.getBno().intValue())
+                .parentNum(boardDTO.getParentNum())
                 .ref(parentBoard.getRef())
                 .refOrder(parentBoard.getRefOrder()+1)
                 .step(parentBoard.getStep()+1)
