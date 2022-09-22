@@ -37,7 +37,7 @@ public class MemberUserService implements UserDetailsService {
 
         Member member = result.get();
 
-        log.info("member = " + member);
+        log.info("email로 조회한 상세 내역 :  " + member);
 
         //Member를 UserDetails 타입으로 처리하기 위해 MemberDTO 타입으로 변환
         AuthMemberDTO authMemberDTO = new AuthMemberDTO(

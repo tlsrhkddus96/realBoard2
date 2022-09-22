@@ -25,10 +25,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
 
         http.formLogin()
-                .defaultSuccessUrl("/board/list"); // 인가/인증 문제시 로그인화면으로
+                .loginPage("/member/login")
+                .loginProcessingUrl("/memberRest/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/board/list");
 
         http.csrf().disable();
-        http.logout().logoutSuccessUrl("/board/list");
+        http.logout().logoutSuccessUrl("/member/login");
 
     }
 

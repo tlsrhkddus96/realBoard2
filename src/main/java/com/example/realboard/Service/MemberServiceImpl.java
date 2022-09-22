@@ -116,4 +116,43 @@ public class MemberServiceImpl implements MemberService{
 
 
     }
+
+    @Override
+    public String checkNicknameEmail(String nickname, String email) {
+
+        Optional<Member> result = memberRepository.findByEmail(email);
+
+        if(result.isEmpty()){
+            return "존재하지 않는 Email입니다.";
+        }
+
+        Member member = result.get();
+
+        String memberEmail = member.getEmail();
+        String memberNickname = member.getNickname();
+
+        boolean checkEmail = memberEmail.equals(email);
+        boolean checkNickname = memberNickname.equals(nickname);
+
+        if(checkEmail && checkNickname){
+            return "확인";
+        }else {
+            return "이메일 또는 아이디가 정확하지 않습니다.";
+        }
+
+    }
+
+    @Transactional
+    @Override
+    public String changePwd(MemberDTO memberDTO) {
+
+        String enPwd = passwordEncoder.encode(memberDTO.getPassword());
+
+        Optional<Member> result = memberRepository.findByEmail(memberDTO.getEmail());
+        Member member = result.get();
+
+        member.changePassword(enPwd);
+
+        return member.getEmail();
+    }
 }

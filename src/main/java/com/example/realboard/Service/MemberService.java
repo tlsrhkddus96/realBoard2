@@ -14,6 +14,10 @@ public interface MemberService {
 
     void remove(MemberDTO memberDTO);
 
+    String checkNicknameEmail(String nickname, String email);
+
+    String changePwd(MemberDTO memberDTO);
+
 
 
     default Member dtoToEntity(MemberDTO memberDTO){
