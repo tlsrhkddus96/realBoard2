@@ -32,7 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String registerMember(MemberDTO memberDTO, RedirectAttributes redirectAttributes){
+    public String registerMember(MemberDTO memberDTO, RedirectAttributes redirectAttributes) throws Exception {
 
         log.info("Member DTO : " + memberDTO);
 
@@ -40,14 +40,14 @@ public class MemberController {
 
         redirectAttributes.addFlashAttribute("email", email);
 
-        return "redirect:/board/list";
+        return "redirect:/member/login";
 
 
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping({"/my","/modify"})
-    public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model){
+    public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model) throws Exception {
                     //@Authentication으로 로그인된 계정의 DTO 가져옴
 
         log.info("AuthMemberDTO : " + authMemberDTO);
@@ -69,7 +69,7 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify")
-    public String modify(MemberDTO memberDTO){
+    public String modify(MemberDTO memberDTO) throws Exception {
 
         log.info(memberDTO);
 

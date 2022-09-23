@@ -17,6 +17,11 @@
                 <input type="text" class="form-control" name="nickname" th:value="${dto.nickname}" readonly>
             </div>
 
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" name="phone" th:value="${dto.phone}" readonly>
+            </div>
+
             <a th:href="@{/member/modify}">
                 <button type="button" class="btn btn-primary">Modify</button>
             </a>

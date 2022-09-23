@@ -21,6 +21,8 @@ public class Member extends BaseEntity{
 
     private String email;
 
+    private String phone;
+
     private String password;
 
     private String nickname;
@@ -34,8 +36,8 @@ public class Member extends BaseEntity{
     }
 
 
-    public void changeEmail(String email){
-        this.email = email;
+    public void changePhone(String phone){
+        this.phone = phone;
     }
 
     public void changeNickname(String nickname){

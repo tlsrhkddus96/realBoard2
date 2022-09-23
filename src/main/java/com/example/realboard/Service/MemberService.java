@@ -6,11 +6,11 @@ import com.example.realboard.dto.MemberDTO;
 public interface MemberService {
 
 
-    String register(MemberDTO memberDTO);
+    String register(MemberDTO memberDTO) throws Exception;
 
-    MemberDTO getMember(String email);
+    MemberDTO getMember(String email) throws Exception;
 
-    void modify(MemberDTO memberDTO);
+    void modify(MemberDTO memberDTO) throws Exception;
 
     void remove(MemberDTO memberDTO);
 
@@ -25,6 +25,7 @@ public interface MemberService {
         Member member = Member.builder()
                 .email(memberDTO.getEmail())
                 .nickname(memberDTO.getNickname())
+                .phone(memberDTO.getPhone())
                 .password(memberDTO.getPassword())
                 .build();
 
@@ -38,6 +39,7 @@ public interface MemberService {
                 .mid(member.getMid())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
+                .phone(member.getPhone())
                 .password(member.getPassword())
                 .build();
 

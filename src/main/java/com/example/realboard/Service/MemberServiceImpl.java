@@ -1,5 +1,6 @@
 package com.example.realboard.Service;
 
+import com.example.realboard.encrypt.Encrypt;
 import com.example.realboard.entity.Board;
 import com.example.realboard.entity.Member;
 import com.example.realboard.entity.MemberRole;
@@ -33,15 +34,16 @@ public class MemberServiceImpl implements MemberService{
 
 
     @Override
-    public String register(MemberDTO memberDTO) {
+    public String register(MemberDTO memberDTO) throws Exception {
+
+        String enCodedPassword = passwordEncoder.encode(memberDTO.getPassword());
+        String enCodedPhone = Encrypt.encryptAES256(memberDTO.getPhone());
+
+        memberDTO.setPassword(enCodedPassword);
+        memberDTO.setPhone(enCodedPhone);
 
         Member member = dtoToEntity(memberDTO);
 
-        String password = member.getPassword();
-
-        String enCodedPassword = passwordEncoder.encode(password);
-
-        member.setPassword(enCodedPassword);    // 인코딩된 패스워드로 변경
         member.addMemberRole(MemberRole.USER); //USER 권한 위임
 
         memberRepository.save(member);
@@ -51,7 +53,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberDTO getMember(String email) {
+    public MemberDTO getMember(String email) throws Exception {
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
@@ -59,6 +61,9 @@ public class MemberServiceImpl implements MemberService{
         log.info(member);
 
         MemberDTO memberDTO = entityToDto(member);
+        String deCodedPhone = Encrypt.decryptAES256(memberDTO.getPhone());
+
+        memberDTO.setPhone(deCodedPhone);
         log.info(memberDTO);
 
         return memberDTO;
@@ -66,17 +71,18 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public void modify(MemberDTO memberDTO) {
+    public void modify(MemberDTO memberDTO) throws Exception {
 
         String email = memberDTO.getEmail();
+        String enCodedPhone = Encrypt.encryptAES256(memberDTO.getPhone());
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
         Member member = result.get();
         log.info(member);
 
-        member.changeEmail(memberDTO.getEmail());
         member.changeNickname(memberDTO.getNickname());
+        member.changePhone(enCodedPhone);
 
         memberRepository.save(member);
 
