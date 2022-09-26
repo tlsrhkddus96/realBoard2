@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MemberTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MemberTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.example.realboard.html">com.example.realboard</a> &gt; MemberTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.680s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">insertMember()</td>
+<td class="success">0.680s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2022-09-26 21:30:18.692  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.realboard.MemberTests], using SpringBootContextLoader
+2022-09-26 21:30:18.694  INFO 18172 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.example.realboard.MemberTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-09-26 21:30:18.695  INFO 18172 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.realboard.MemberTests]: MemberTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-09-26 21:30:18.696  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.realboard.RealBoardApplication for test class com.example.realboard.MemberTests
+2022-09-26 21:30:18.699  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-09-26 21:30:18.699  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ffe7c42, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5f72aaed, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1d9295e2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4b708c16, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2700f556, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6def1699, org.springframework.test.context.transaction.TransactionalTestExecutionListener@64dbb343, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2b0483f2, org.springframework.test.context.event.EventPublishingTestExecutionListener@b8e6981, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1e40edb7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@27381497, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@282c0891, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5096be74, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4922dc84, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2ed9e59b]
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4.1</a> at 2022. 9. 26. 오후 9:30:19</p>
+</div>
+</div>
+</body>
+</html>

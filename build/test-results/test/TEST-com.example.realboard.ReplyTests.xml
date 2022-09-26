@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.realboard.ReplyTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-09-26T12:30:19" hostname="DESKTOP-1408KAA" time="0.066">
+  <properties/>
+  <testcase name="testGetBoardReply()" classname="com.example.realboard.ReplyTests" time="0.049"/>
+  <testcase name="testReplyGGet()" classname="com.example.realboard.ReplyTests" time="0.007"/>
+  <testcase name="DeleteReplyByMember()" classname="com.example.realboard.ReplyTests" time="0.008"/>
+  <system-out><![CDATA[2022-09-26 21:30:19.387  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.realboard.ReplyTests], using SpringBootContextLoader
+2022-09-26 21:30:19.388  INFO 18172 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.example.realboard.ReplyTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-09-26 21:30:19.388  INFO 18172 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.realboard.ReplyTests]: ReplyTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-09-26 21:30:19.389  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.realboard.RealBoardApplication for test class com.example.realboard.ReplyTests
+2022-09-26 21:30:19.392  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-09-26 21:30:19.392  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4ce5013a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4c219c84, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@2b01be54, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@14997cb9, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@701153c1, org.springframework.test.context.support.DirtiesContextTestExecutionListener@301434fb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1641dfb3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@49620576, org.springframework.test.context.event.EventPublishingTestExecutionListener@3397c8c0, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@22b581a5, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3a917e07, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@63019596, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6edd80fe, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@60eb9c29, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@51bba775]
+Hibernate: 
+    select
+        reply0_.reply_num as reply_nu1_5_0_,
+        member1_.mid as mid1_3_1_,
+        reply0_.moddate as moddate2_5_0_,
+        reply0_.regdate as regdate3_5_0_,
+        reply0_.board_bno as board_bn5_5_0_,
+        reply0_.member_mid as member_m6_5_0_,
+        reply0_.text as text4_5_0_,
+        member1_.moddate as moddate2_3_1_,
+        member1_.regdate as regdate3_3_1_,
+        member1_.email as email4_3_1_,
+        member1_.nickname as nickname5_3_1_,
+        member1_.password as password6_3_1_,
+        member1_.phone as phone7_3_1_ 
+    from
+        reply reply0_ 
+    left outer join
+        member member1_ 
+            on reply0_.member_mid=member1_.mid 
+    where
+        reply0_.board_bno=?
+11
+Reply..11
+user11@naver.com
+46
+Reply..46
+user4@naver.com
+49
+Reply..49
+user21@naver.com
+57
+Reply..57
+user10@naver.com
+Hibernate: 
+    select
+        reply0_.reply_num as reply_nu1_5_0_,
+        member1_.mid as mid1_3_1_,
+        reply0_.moddate as moddate2_5_0_,
+        reply0_.regdate as regdate3_5_0_,
+        reply0_.board_bno as board_bn5_5_0_,
+        reply0_.member_mid as member_m6_5_0_,
+        reply0_.text as text4_5_0_,
+        member1_.moddate as moddate2_3_1_,
+        member1_.regdate as regdate3_3_1_,
+        member1_.email as email4_3_1_,
+        member1_.nickname as nickname5_3_1_,
+        member1_.password as password6_3_1_,
+        member1_.phone as phone7_3_1_ 
+    from
+        reply reply0_ 
+    left outer join
+        member member1_ 
+            on reply0_.member_mid=member1_.mid 
+    where
+        reply0_.board_bno=?
+2022-09-26 21:30:19.453  INFO 18172 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@5a513627 testClass = ReplyTests, testInstance = com.example.realboard.ReplyTests@41413c5a, testMethod = DeleteReplyByMember@ReplyTests, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@306a9cd8 testClass = ReplyTests, locations = '{}', classes = '{class com.example.realboard.RealBoardApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@65b3a85a, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4c4d27c8, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@129b4fe2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10993713, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@a8e6492, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@452e19ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@1ed0128b]; rollback [false]
+Hibernate: 
+    delete 
+    from
+        reply 
+    where
+        member_mid=?
+2022-09-26 21:30:19.460  INFO 18172 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Committed transaction for test: [DefaultTestContext@5a513627 testClass = ReplyTests, testInstance = com.example.realboard.ReplyTests@41413c5a, testMethod = DeleteReplyByMember@ReplyTests, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@306a9cd8 testClass = ReplyTests, locations = '{}', classes = '{class com.example.realboard.RealBoardApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@65b3a85a, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4c4d27c8, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@129b4fe2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10993713, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@a8e6492, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@452e19ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

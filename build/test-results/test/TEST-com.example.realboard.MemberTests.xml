@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.realboard.MemberTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-26T12:30:18" hostname="DESKTOP-1408KAA" time="0.68">
+  <properties/>
+  <testcase name="insertMember()" classname="com.example.realboard.MemberTests" time="0.68"/>
+  <system-out><![CDATA[2022-09-26 21:30:18.692  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.realboard.MemberTests], using SpringBootContextLoader
+2022-09-26 21:30:18.694  INFO 18172 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.example.realboard.MemberTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-09-26 21:30:18.695  INFO 18172 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.realboard.MemberTests]: MemberTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-09-26 21:30:18.696  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.realboard.RealBoardApplication for test class com.example.realboard.MemberTests
+2022-09-26 21:30:18.699  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-09-26 21:30:18.699  INFO 18172 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1ffe7c42, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5f72aaed, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1d9295e2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4b708c16, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2700f556, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6def1699, org.springframework.test.context.transaction.TransactionalTestExecutionListener@64dbb343, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2b0483f2, org.springframework.test.context.event.EventPublishingTestExecutionListener@b8e6981, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1e40edb7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@27381497, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@282c0891, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5096be74, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4922dc84, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2ed9e59b]
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (moddate, regdate, email, nickname, password, phone) 
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member_role_set
+        (member_mid, role_set) 
+    values
+        (?, ?)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
