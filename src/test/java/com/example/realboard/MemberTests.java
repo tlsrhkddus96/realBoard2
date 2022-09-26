@@ -55,7 +55,7 @@ public class MemberTests {
 
     }
 
-    @Commit
+/*    @Commit
     @Transactional
     @Test
     public void testDeleteMember(){
@@ -88,7 +88,7 @@ public class MemberTests {
         memberRepository.deleteById(mid);
 
 
-    }
+    }*/
 
 /*    @Test
     public void testGet(){

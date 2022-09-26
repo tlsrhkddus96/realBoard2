@@ -36,38 +36,6 @@ public class BoardTests {
     @Autowired
     private ReplyRepository replyRepository;
 
-    @Test
-    public void insertTests(){
-
-        LongStream.rangeClosed(1,30).forEach(i -> {
-
-            Member member = Member.builder().mid(i).build();
-
-            Board board = Board.builder()
-                    .content("임시"+i)
-                    .title("임시제목"+i)
-                    .ref((int) i)
-                    .member(member)
-                    .build();
-            boardRepository.save(board);
-            boardRepository.updateRef(board.getBno());
-
-            int count = (int) (Math.random() * 2) +1;
-
-            for(int j = 0; j<count; j++){
-
-                BoardImage boardImage = BoardImage.builder()
-                        .uuid(UUID.randomUUID().toString())
-                        .board(board)
-                        .imageName("test"+j+".jpg").build();
-
-                imageRepository.save(boardImage);
-
-            }
-
-        });
-
-    }
 
     @Test
     public void insertKid(){
@@ -114,33 +82,6 @@ public class BoardTests {
 
     }
 
-    @Test
-    public void testGetListPage(){
-
-        Pageable pageable = PageRequest.of(0,10, Sort.by("ref").descending().and(Sort.by("refOrder").ascending()));
-
-        Page<Object[]> result = boardRepository.getBoardWithReplyCount(pageable);
-
-        result.get().forEach(row -> {
-            Object[] arr = (Object[]) row;
-
-            System.out.println(Arrays.toString(arr));
-        });
-
-    }
-
-    @Test
-    public void testGetBoard(){
-
-        List<Object[]> result = boardRepository.getBoardWithAll(55L);
-
-        System.out.println(result);
-
-        for (Object[] arr : result){
-            System.out.println(Arrays.toString(arr));
-        }
-
-    }
 
 
     @Transactional
@@ -171,15 +112,7 @@ public class BoardTests {
 
     }
 
-    @Test
-    public void testRefParentNum(){
 
-        Long bno =58L;
-        Long parentNum=12L;
-
-        boardRepository.updateRefParentNum(bno,parentNum);
-
-    }
 
 
     @Transactional
