@@ -49,4 +49,11 @@ public class Member extends BaseEntity{
     }
 
 
+    public Member update(String nickname){
+        this.nickname = nickname;
+
+        return this;
+
+    }
+
 }
