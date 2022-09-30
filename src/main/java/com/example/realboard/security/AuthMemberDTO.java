@@ -21,6 +21,8 @@ public class AuthMemberDTO extends User {
 
     private String nickname;
 
+    private String phone;
+
 
 
     public AuthMemberDTO(String username,

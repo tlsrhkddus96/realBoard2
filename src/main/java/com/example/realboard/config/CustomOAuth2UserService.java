@@ -40,7 +40,12 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
                 .getUserNameAttributeName();
 
-        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName,oAuth2User.getAttributes());
+        OAuthAttributes attributes = null;
+        try {
+            attributes = OAuthAttributes.of(registrationId, userNameAttributeName,oAuth2User.getAttributes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         log.info("Attributes : >>" + attributes.getAttributes());
         log.info("OAuthAttributes.of >>" );
@@ -49,7 +54,12 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         log.info(oAuth2User.getAttributes());
         log.info(delegate.loadUser(userRequest).getAttributes().get("email"));
 
-        Member member = saveOrUpdate(attributes);
+        Member member = null;
+        try {
+            member = saveOrUpdate(attributes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         httpSession.setAttribute("member", new SessionUser(member));
 
@@ -60,9 +70,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     }
 
-    private Member saveOrUpdate(OAuthAttributes attributes) {
+    private Member saveOrUpdate(OAuthAttributes attributes) throws Exception {
         Member member = memberRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName()))
+                .map(entity -> entity.update(attributes.getName(),attributes.getPhone()))
                 .orElse(attributes.toEntity());
 
         return memberRepository.save(member);

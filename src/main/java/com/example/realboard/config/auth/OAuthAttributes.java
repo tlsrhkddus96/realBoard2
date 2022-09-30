@@ -1,5 +1,6 @@
 package com.example.realboard.config.auth;
 
+import com.example.realboard.encrypt.Encrypt;
 import com.example.realboard.entity.Member;
 import com.example.realboard.entity.MemberRole;
 import lombok.Builder;
@@ -17,40 +18,44 @@ public class OAuthAttributes {
     private String nameAttributeKey;
     private String name;
     private String email;
+    private String phone;
 
     @Builder
     public OAuthAttributes(Map<String,Object> attributes,
                            String nameAttributeKey,
-                           String name, String email){
+                           String name, String email, String phone){
 
         this.attributes=attributes;
         this.nameAttributeKey=nameAttributeKey;
         this.name = name;
         this.email = email;
+        this.phone = phone;
 
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName,
-                                     Map<String,Object> attributes){
+                                     Map<String,Object> attributes) throws Exception {
         return ofGoogle(userNameAttributeName, attributes);
     }
 
-    private static OAuthAttributes ofGoogle(String userNameAttributeName , Map<String,Object> attributes){
+    private static OAuthAttributes ofGoogle(String userNameAttributeName , Map<String,Object> attributes) throws Exception {
 
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
+                .phone(Encrypt.encryptAES256("Google"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
 
     }
 
-    public Member toEntity(){
+    public Member toEntity() throws Exception {
 
         Member member = Member.builder()
                 .nickname(name)
                 .email(email)
+                .phone(Encrypt.encryptAES256("Google"))
                 .build();
 
         member.addMemberRole(MemberRole.USER);
