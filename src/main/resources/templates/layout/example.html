@@ -39,6 +39,7 @@
                 <li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
                 <li><a class="dropdown-item" sec:authorize="isAnonymous()" th:href="@{/member/login}">Login</a></li>
                 <li><a class="dropdown-item" sec:authorize="isAnonymous()" href="/oauth2/authorization/google">Google Login</a></li>
+                <li><a class="dropdown-item" sec:authorize="isAnonymous()" href="/oauth2/authorization/naver">Naver Login</a></li>
             </ul>
         </li>
     </ul>

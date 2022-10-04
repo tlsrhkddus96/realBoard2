@@ -35,6 +35,10 @@ public class OAuthAttributes {
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName,
                                      Map<String,Object> attributes) throws Exception {
+        if("naver".equals(registrationId)){
+            return ofNaver("id",attributes);
+        }
+
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -50,12 +54,26 @@ public class OAuthAttributes {
 
     }
 
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) throws Exception {
+
+        Map<String , Object> response = (Map<String, Object>) attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .phone(Encrypt.encryptAES256("Naver"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+
+    }
+
     public Member toEntity() throws Exception {
 
         Member member = Member.builder()
                 .nickname(name)
                 .email(email)
-                .phone(Encrypt.encryptAES256("Google"))
+                .phone(Encrypt.encryptAES256("OAuth2"))
                 .build();
 
         member.addMemberRole(MemberRole.USER);
