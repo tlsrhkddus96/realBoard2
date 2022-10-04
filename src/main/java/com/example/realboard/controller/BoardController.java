@@ -1,6 +1,9 @@
 package com.example.realboard.controller;
 
 import com.example.realboard.Service.BoardService;
+import com.example.realboard.Service.MemberService;
+import com.example.realboard.config.auth.LoginUser;
+import com.example.realboard.config.auth.dto.SessionUser;
 import com.example.realboard.dto.BoardDTO;
 import com.example.realboard.dto.MemberDTO;
 import com.example.realboard.dto.PageRequestDTO;
@@ -24,14 +27,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BoardController {
 
     private final BoardService boardService;
+    private final MemberService memberService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
-    public void register(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model){
+    public void register(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @LoginUser SessionUser member, Model model) throws Exception {
 
-        log.info("MemberDTO auth : " + authMemberDTO);
+        if(authMemberDTO != null) {
+            model.addAttribute("dto", authMemberDTO);
+        }else {
 
-        model.addAttribute("dto",authMemberDTO);
+            String email = member.getEmail();
+
+            MemberDTO memberDTO = memberService.getMember(email);
+
+            model.addAttribute("dto",memberDTO);
+        }
 
     }
 
@@ -60,17 +71,20 @@ public class BoardController {
 
     @GetMapping({"/read","/modify"})
     public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,
-            Long bno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
+            Long bno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                     @LoginUser SessionUser member, Model model) throws Exception {
 
-        log.info("AuthMemberDTO : " + authMemberDTO);
-
-        log.info("Bno : " + bno);
+        if(authMemberDTO != null) {
+            log.info("AuthMemberDTO : " + authMemberDTO);
+            model.addAttribute("authDTO", authMemberDTO);
+        }else if(member != null){
+            String email = member.getEmail();
+            MemberDTO memberDTO = memberService.getMember(email);
+            model.addAttribute("authDTO",memberDTO);
+        }
 
         BoardDTO boardDTO = boardService.getBoard(bno);
-
-        model.addAttribute("dto",boardDTO);
-        model.addAttribute("authDTO",authMemberDTO);
-
+        model.addAttribute("dto", boardDTO);
     }
 
     @PostMapping("/remove")
@@ -90,7 +104,7 @@ public class BoardController {
     public String modify(BoardDTO boardDTO, @ModelAttribute("requestDTO")PageRequestDTO requestDTO,
                          RedirectAttributes redirectAttributes){
 
-        log.info("Controller Modify ] boardDTO : " + boardDTO);
+        log.info("Modify boardDTO : " + boardDTO);
 
         boardService.modifyBoard(boardDTO);
 
@@ -105,11 +119,18 @@ public class BoardController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/kidRegister")
     public void kidRegister(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,
-                            Model model,int parentNum, int ref){
+                            @LoginUser SessionUser member,
+                            Model model,int parentNum, int ref) throws Exception {
 
-        log.info("Auth MemberDTO : " + authMemberDTO);
+        if(authMemberDTO!= null) {
+            log.info("Auth MemberDTO : " + authMemberDTO);
+            model.addAttribute("dto", authMemberDTO);
+        }else{
+            String email = member.getEmail();
+            MemberDTO memberDTO = memberService.getMember(email);
+            model.addAttribute("dto",memberDTO);
+        }
 
-        model.addAttribute("dto",authMemberDTO);
         model.addAttribute("parentNum",parentNum);
         model.addAttribute("ref",ref);
 

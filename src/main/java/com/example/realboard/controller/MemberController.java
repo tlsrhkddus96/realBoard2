@@ -1,6 +1,8 @@
 package com.example.realboard.controller;
 
 import com.example.realboard.Service.MemberService;
+import com.example.realboard.config.auth.LoginUser;
+import com.example.realboard.config.auth.dto.SessionUser;
 import com.example.realboard.dto.MemberDTO;
 import com.example.realboard.entity.Member;
 import com.example.realboard.security.AuthMemberDTO;
@@ -49,22 +51,33 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping({"/my","/modify"})
-    public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, Model model) throws Exception {
+    public void read(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @LoginUser SessionUser member, Model model) throws Exception {
                     //@Authentication으로 로그인된 계정의 DTO 가져옴
 
-        log.info("AuthMemberDTO : " + authMemberDTO);
+        if(authMemberDTO != null){
 
-        String email = authMemberDTO.getEmail();
+            String email = authMemberDTO.getEmail();
+            log.info( " email  : " + email);
 
-        log.info( " email  : " + email);
+            //로그인된 계정의 이메일로 findBy쿼리 진행
+            MemberDTO dto =  memberService.getMember(email);
 
-        //로그인된 계정의 이메일로 findBy쿼리 진행
-        MemberDTO dto =  memberService.getMember(email);
+            log.info("dto : " + dto);
 
-        log.info("dto : " + dto);
+            //"dto" 에 데이터를 넣어주고 화면에 해당 값들을 띄움
+            model.addAttribute("dto", dto);
 
-        //"dto" 에 데이터를 넣어주고 화면에 해당 값들을 띄움
-        model.addAttribute("dto", dto);
+        }else {
+            String email = member.getEmail();
+            log.info("OAuth Email = " + email);
+
+            MemberDTO dto = memberService.getMember(email);
+
+            log.info("OAuth dto : " + dto );
+
+            model.addAttribute("dto",dto);
+        }
+
 
 
     }
