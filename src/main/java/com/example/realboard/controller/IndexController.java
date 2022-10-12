@@ -29,6 +29,7 @@ public class IndexController {
 
         return "redirect:/board/list";
 
+
     }
 
 }
