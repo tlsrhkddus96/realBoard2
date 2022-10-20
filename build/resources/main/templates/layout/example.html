@@ -90,6 +90,8 @@
                                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/register}">Sign up</a>
                                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/my}">My Page</a>
                                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">Login</a>
+                                    <a class="nav-link" sec:authorize="isAnonymous()" href="/oauth2/authorization/google">Google Login</a>
+                                    <a class="nav-link" sec:authorize="isAnonymous()" href="/oauth2/authorization/naver">Naver Login</a>
                                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
                                 </nav>
                             </div>
@@ -130,6 +132,7 @@
                 <th:block th:replace="${content}">
 
                 </th:block>
+
 
             </div>
         </main>
