@@ -12,6 +12,7 @@ import java.util.List;
 @SpringBootTest
 public class BoardLikeTests {
 
+/*
     @Autowired
     private BoardLikeRepository likeRepository;
 
@@ -27,7 +28,7 @@ public class BoardLikeTests {
 
         System.out.println(result);
 
-        /*  result 결과 값(bno)의 likeHit -1 */
+        *//*  result 결과 값(bno)의 likeHit -1 *//*
 
         result.forEach(bno -> {
             System.out.println("bno : " + bno);
@@ -47,7 +48,7 @@ public class BoardLikeTests {
 
 
 
-    }
+    }*/
 
 
 }
