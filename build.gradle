@@ -30,6 +30,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -94,13 +95,13 @@ sourceSets {
 
 }
 
-/* 10-8. querydsl이 complieClasspath를 상속하도록 설정 */
+/* 10-8. querydsl이 complieClasspath를 상속하도록 설정 *//*
 
 configurations {
 
     querydsl.extendsFrom compileClasspath
 
-}
+}*/
 
 
 /* 10-9. querydsl 컴파일시 사용할 옵션 설정 */
