@@ -37,7 +37,6 @@ public class BoardLikeTests {
 
     }
 
-
     @Test
     public void testLikeCheck(){
 
