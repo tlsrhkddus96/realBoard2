@@ -113,3 +113,6 @@ compileQuerydsl {
 
 }
 
+jar {
+    enabled = false //plain.jar 생성x
+}
