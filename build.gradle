@@ -12,7 +12,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'war'
+    /*id 'war'*/ // war > jar
 
     /* 10-2. querydsl plugin 추가 */
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
@@ -47,7 +47,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    /*providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'*/ //war > jar
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group : 'org.mariadb.jdbc' , name : 'mariadb-java-client'
