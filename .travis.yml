@@ -18,9 +18,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r com-example-realBoard2
+  - zip -r com-example-realBoard
   - mkdir -p deploy
-  - mv com-example-realBoard2.zip deploy/com-example-realBoard2.zip
+  - mv com-example-realBoard.zip deploy/com-example-realBoard.zip
 
 deploy:
   -provider: s3
