@@ -36,19 +36,32 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public String register(MemberDTO memberDTO) throws Exception {
 
-        String enCodedPassword = passwordEncoder.encode(memberDTO.getPassword());
-        String enCodedPhone = Encrypt.encryptAES256(memberDTO.getPhone());
+        String email = memberDTO.getEmail();
+        Optional<Member> checkDuplicatedEmail = memberRepository.findByEmail(email);
 
-        memberDTO.setPassword(enCodedPassword);
-        memberDTO.setPhone(enCodedPhone);
+        if(checkDuplicatedEmail.isEmpty()){
 
-        Member member = dtoToEntity(memberDTO);
+            String enCodedPassword = passwordEncoder.encode(memberDTO.getPassword());
+            String enCodedPhone = Encrypt.encryptAES256(memberDTO.getPhone());
 
-        member.addMemberRole(MemberRole.USER); //USER 권한 위임
+            memberDTO.setPassword(enCodedPassword);
+            memberDTO.setPhone(enCodedPhone);
 
-        memberRepository.save(member);
+            Member member = dtoToEntity(memberDTO);
 
-        return member.getEmail();
+            member.addMemberRole(MemberRole.USER); //USER 권한 위임
+
+            memberRepository.save(member);
+
+            return member.getEmail();
+
+        }else{
+
+            return "이미 사용중인 이메일입니다.";
+
+        }
+
+
 
     }
 

@@ -29,7 +29,7 @@ public class MemberRestController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @Transactional
+
     @PutMapping("/changePwd")
     public ResponseEntity<String> changePwd(@RequestBody MemberDTO memberDTO){
 
@@ -38,5 +38,15 @@ public class MemberRestController {
         return new ResponseEntity<>(result,HttpStatus.OK);
 
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerMember(@RequestBody MemberDTO memberDTO) throws Exception {
+
+        String result = memberService.register(memberDTO);
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+
+    }
+
 
 }

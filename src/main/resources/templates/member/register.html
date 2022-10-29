@@ -33,7 +33,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control phone" id="phone" name="phone"
-                                                               type="text" />
+                                                               type="text" maxlength="11" />
                                                         <label for="phone">Phone Number</label>
                                                     </div>
                                                 </div>
@@ -68,7 +68,7 @@
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
                                                     <!--<a class="btn btn-primary btn-block" href="login.html">Create Account</a>-->
-                                                    <button type="submit" class="btn btn-primary btn-block create">Create Account</button>
+                                                    <button type="button" class="btn btn-primary btn-block create">Create Account</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -99,8 +99,80 @@
                 </footer>
             </div>
         </div>
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script th:src="@{/js/scripts.js}">
+
+        </script>
+
+        <script>
+
+
+            let inputNickname = $('input[name="nickname"]');
+            let inputEmail = $('input[name="email"]');
+            let inputPhone = $('input[name="phone"]');
+            let inputPassword = $('input[name="password"]');
+
+            function checkValidation(){
+
+                let regPhone = /^01([0|1])-?([0-9]{3,4})-?([0-9]{4})$/;
+                let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+
+                if(!regPhone.test(inputPhone.val())){
+                    alert("정확한 형식의 전화번호를 입력해주세요.");
+                    return false;
+                }else
+
+                if(inputPassword.val().length==0){
+                    alert("비밀번호를 입력해주세요.");
+                    return false;
+                }else
+
+                if(inputNickname.val().length==0){
+                    alert("닉네임을 입력해주세요.");
+                    return false;
+                }else
+
+                if(!regEmail.test(inputEmail.val())){
+                    alert("정확한 형식의 이메일을 입력해주세요.");
+                    return false;
+                }else{
+                    return true;
+                }
+
+                return false;
+
+            }
+
+            $(".create").click(function (e){
+
+                checkValidation();
+
+                let data = {
+                    nickname: inputNickname.val(),
+                    email: inputEmail.val(),
+                    phone: inputPhone.val(),
+                    password: inputPassword.val()
+                }
+
+                $.ajax({
+                    url:"/memberRest/register",
+                    type:"POST",
+                    data:JSON.stringify(data),
+                    contentType:"application/json; charset=utf-8",
+                    success: function (result){
+
+                        alert(result);
+
+                    }
+                })
+
+                console.log(data);
+
+            })
+
+
         </script>
 
 
