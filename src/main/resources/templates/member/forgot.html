@@ -112,6 +112,10 @@
 
                 $(".checkBtn").click(function (){
 
+                    if(checkValidation()==false){
+                        return false;
+                    }
+
                     let data = {
                         nickname:inputNickname.val(),
                         email:inputEmail.val()
@@ -146,8 +150,7 @@
 
                 $(".resetPwdBtn").click(function (){
 
-                    if(modalPwd.val() !== confirmPwd.val()){
-                        alert("비밀번호가 일치하지 않습니다.")
+                    if(checkValidationModal()==false){
                         return false;
                     }
 
@@ -173,6 +176,34 @@
                     })
 
                 })
+
+                function checkValidation(){
+
+                    if(inputEmail.val().length==0){
+                        alert("이메일을 입력해주세요.");
+                        return false;
+                    }else if(inputNickname.val().length==0){
+                        alert("닉네임을 입력해주세요.");
+                        return false;
+                    }else{
+                        return true;
+                    }
+
+                }
+
+                function checkValidationModal(){
+
+                    if(modalPwd.val().length==0 || confirmPwd.val().length==0){
+                        alert("비밀번호를 입력해주세요.");
+                        return false;
+                    }else if(modalPwd.val() !== confirmPwd.val()){
+                        alert("비밀번호가 일치하지 않습니다.")
+                        return false;
+                    }else {
+                        return true;
+                    }
+
+                }
 
 
                 $(".forgotBtn").click(function (){

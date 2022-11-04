@@ -77,6 +77,7 @@ public class MemberController {
             log.info("OAuth dto : " + dto );
 
             model.addAttribute("dto",dto);
+            model.addAttribute("oauth","oauth");
         }
 
 

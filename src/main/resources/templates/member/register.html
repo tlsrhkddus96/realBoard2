@@ -58,12 +58,13 @@
                                                         <label for="password">Password</label>
                                                     </div>
                                                 </div>
-                                                <!--<div class="col-md-6">
+                                                <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                        <input class="form-control" id="inputPasswordConfirm" name="inputPasswordConfirm"
+                                                               type="password" />
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
                                                     </div>
-                                                </div>-->
+                                                </div>
                                             </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
@@ -75,7 +76,7 @@
                                     </div>
                                     <div class="card-footer text-center py-3">
                                         <div class="small">
-                                            <a th:href="@{/login}">Have an account? Go to login</a>
+                                            <a th:href="@{/member/login}">Have an account? Go to login</a>
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +113,7 @@
             let inputEmail = $('input[name="email"]');
             let inputPhone = $('input[name="phone"]');
             let inputPassword = $('input[name="password"]');
+            let inputConfirmPassword = $('input[name="inputPasswordConfirm"]');
 
             function checkValidation(){
 
@@ -129,6 +131,9 @@
 
                 if(inputPassword.val().length==0){
                     alert("비밀번호를 입력해주세요.");
+                    return false;
+                }else if(inputPassword.val()!=inputConfirmPassword.val()){
+                    alert("비밀번호가 일치하지 않습니다.");
                     return false;
                 }else
 
