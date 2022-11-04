@@ -119,10 +119,13 @@
                 let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
 
-                if(!regPhone.test(inputPhone.val())){
+                if(inputPhone.val().length==0){
+                    alert("전화번호를 입력해주세요.");
+                    return false;
+                }else if(!regPhone.test(inputPhone.val())){
                     alert("정확한 형식의 전화번호를 입력해주세요.");
                     return false;
-                }else
+                }
 
                 if(inputPassword.val().length==0){
                     alert("비밀번호를 입력해주세요.");
@@ -147,7 +150,9 @@
 
             $(".create").click(function (e){
 
-                checkValidation();
+                if(checkValidation()==false){
+                    return false;
+                };
 
                 let data = {
                     nickname: inputNickname.val(),
@@ -163,7 +168,13 @@
                     contentType:"application/json; charset=utf-8",
                     success: function (result){
 
-                        alert(result);
+                        if(result=="이미 사용중인 이메일입니다."){
+                            alert(result);
+                            return false;
+                        }else{
+                            alert(result+"님 회원가입이 완료되었습니다.");
+                            location.href="/member/login";
+                        }
 
                     }
                 })
