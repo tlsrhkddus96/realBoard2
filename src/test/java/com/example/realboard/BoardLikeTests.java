@@ -7,10 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
 public class BoardLikeTests {
+
 
 /*
     @Autowired
