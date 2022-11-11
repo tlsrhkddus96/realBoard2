@@ -201,11 +201,32 @@
 
                 }); //이미지 삭제
 
+                let inputContent = $('textarea[name="content"]');
+                let inputTitle = $('input[name="title"]');
+
+                function test(){
+
+                    if(inputTitle.val().length==0){
+                        alert("제목을 입력해주세요.");
+                        return false;
+                    }else if(inputContent.val().length==0){
+                        alert("내용을 입력해주세요.")
+                        return false;
+                    }else{
+                        return true;
+                    }
+
+                }
+
 
                 //submit 버튼 클릭시
                 $(".btn-primary").on("click",function (e){
 
                     e.preventDefault();
+
+                    if(test()==false){
+                        return false;
+                    }
 
                     let str= "";
 

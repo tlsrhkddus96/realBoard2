@@ -217,6 +217,10 @@
                 /* save Reply Btn */
                 $('.replySaveBtn').click(function (){
 
+                    if(testReply()==false){
+                        return false;
+                    }
+
                     let data = {bno:bno,
                         text:inputText.val(),
                         mid:inputMid.val()};
@@ -307,6 +311,10 @@
                 /* Modify Reply */
                 $(".modifyBtn").on("click", function (){
 
+                    if(testReply()==false){
+                        return false;
+                    }
+
                     let data = {replyNum:replyNum, bno:bno, text:inputText.val(), mid:inputMid.val()};
 
                     console.log(data);
@@ -357,6 +365,14 @@
 
                 });
                 /* End Remove Reply */
+
+                function testReply(){
+                    if(inputText.val().length==0){
+                        alert("내용을 입력해주세요.");
+                        return false;
+                    }
+                    return true;
+                }
 
 
                 /* Click Picture */

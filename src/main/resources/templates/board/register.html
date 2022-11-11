@@ -40,7 +40,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" >Submit</button>
 
             <div class="uploadResult">
                 <ul>
@@ -85,8 +85,10 @@
         <script>
             $(document).ready(function (e){
 
-                let regex = new RegExp("(.*?)\.(exe|sh|zip)$");
+                let regex = new RegExp("(.*?)\.(exe|sh|zip|pdf)$");
                 let maxSize = 10488760; //10MB
+
+
 
                 //유효성검사
                 function checkExtension(fileName, fileSize){
@@ -97,7 +99,7 @@
                     }
 
                     if(regex.test(fileName)){
-                        alert("해당 종류의 파일은 업로드할 수 없습니다.");
+                        alert("이미지 파일만 업로드할 수 있습니다.");
                         return false;
                     }
 
@@ -199,10 +201,31 @@
                 }); //이미지 삭제
 
 
+                let inputContent = $('textarea[name="content"]');
+                let inputTitle = $('input[name="title"]');
+
+                function test(){
+
+                    if(inputTitle.val().length==0){
+                        alert("제목을 입력해주세요.");
+                        return false;
+                    }else if(inputContent.val().length==0){
+                        alert("내용을 입력해주세요.")
+                        return false;
+                    }else{
+                        return true;
+                    }
+
+                }
+
                 //submit 버튼 클릭시
                 $(".btn-primary").on("click",function (e){
 
                     e.preventDefault();
+
+                    if(test()==false){
+                        return false;
+                    }
 
                     let str= "";
 
@@ -224,6 +247,8 @@
 
             });
         </script>
+
+
 
 
     </th:block>

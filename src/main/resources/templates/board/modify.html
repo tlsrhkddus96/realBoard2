@@ -48,14 +48,6 @@
 
             </div>
 
-<!--            <div class="uploadResult">
-                <ul>
-                    <li th:each="boardImage: ${dto.imageDTOList}">
-                        <img th:if="${boardImage.path != null}" th:src="|/display?fileName=${boardImage.getThumbnailURL()}|">
-                    </li>
-                </ul>
-            </div>-->
-
 
             <div class="uploadedResult">
                 <label class="uploadLabel">Uploaded Image</label>
@@ -298,12 +290,31 @@
         <script th:inline="javascript">
 
             let actionForm = $("form"); //form객체
+            let inputContent = $('textarea[name="content"]');
+            let inputTitle = $('input[name="title"]');
+
+            function test(){
+
+                if(inputTitle.val().length==0){
+                    alert("제목을 입력해주세요.");
+                    return false;
+                }else if(inputContent.val().length==0){
+                    alert("내용을 입력해주세요.")
+                    return false;
+                }else{
+                    return true;
+                }
+
+            }
 
             /*  Modify Button */
             $(".modifyBtn").click(function (){
 
                 if(!confirm("수정하시겠습니까?")){
                     return;
+                }
+                if(test()==false){
+                    return false;
                 }
 
                 actionForm
