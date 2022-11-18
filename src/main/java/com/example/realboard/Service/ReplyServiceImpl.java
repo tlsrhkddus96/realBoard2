@@ -31,6 +31,7 @@ public class ReplyServiceImpl implements ReplyService{
                 entityToDto(boardReply)).collect(Collectors.toList());
     }
 
+
     @Override
     public Long register(ReplyDTO boardReplyDTO) {
 

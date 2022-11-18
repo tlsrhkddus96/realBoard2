@@ -29,6 +29,7 @@ public interface ReplyService {
 
         return boardReply;
 
+
     }
 
     default ReplyDTO entityToDto(Reply boardReply){
