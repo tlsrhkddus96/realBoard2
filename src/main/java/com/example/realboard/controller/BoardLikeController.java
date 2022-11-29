@@ -23,6 +23,7 @@ public class BoardLikeController {
     @PostMapping("/updateLike")
     public ResponseEntity<Integer> updateLike(@RequestBody BoardLikeDTO boardLikeDTO) throws Exception{
 
+
         log.info(boardLikeDTO);
 
         Long bno = boardLikeDTO.getBno();
