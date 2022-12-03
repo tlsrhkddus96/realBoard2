@@ -16,14 +16,34 @@ public class BoardLikeTests {
     @Test
     public void test(){
 
+        String answer="";
 
-        String dsa = "dsadas";
+        String dsa = "FdsTaD";
+        ArrayList<String> list = new ArrayList<>();
 
-        dsa.split(" ");
+        for(int i=0; i<dsa.length(); i++){
+            list.add(String.valueOf(dsa.charAt(i)));
+        }
 
-        System.out.println(dsa);
+        ArrayList<String> array1 = new ArrayList<>();
+        ArrayList<String> array2 = new ArrayList<>();
 
+        for(int i=0; i<dsa.length(); i++){
+            if(list.get(i).matches("^[a-z]")){
+                array1.add(String.valueOf(dsa.charAt(i)));
+            }else{
+                array2.add(String.valueOf(dsa.charAt(i)));
+            }
+        }
+        Collections.sort(array1,Collections.reverseOrder());
+        Collections.sort(array2,Collections.reverseOrder());
 
+        for(int i=0; i<array1.size(); i++){
+            answer+=array1.get(i);
+        }
+        for(int i=0; i<array2.size(); i++){
+            answer+=array2.get(i);
+        }
 
 
     }
