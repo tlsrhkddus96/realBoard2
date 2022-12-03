@@ -13,8 +13,20 @@ import java.util.Collections;
 @SpringBootTest
 public class BoardLikeTests {
 
+    @Test
+    public void test(){
 
 
+        String dsa = "dsadas";
+
+        dsa.split(" ");
+
+        System.out.println(dsa);
+
+
+
+
+    }
 
 
 
