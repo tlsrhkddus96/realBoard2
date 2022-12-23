@@ -33,9 +33,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        /*registrationID >> Email로 변경 제발*/
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        //String registrationId = delegate.loadUser(userRequest).getAttributes().get("email").toString();
 
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
                 .getUserNameAttributeName();
